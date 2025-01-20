@@ -1,0 +1,7 @@
+/linux/
+/build/
+/.dart_tool/
+/.idea/
+/macos/
+/web/
+/windows/
