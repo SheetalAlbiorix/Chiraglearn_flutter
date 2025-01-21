@@ -41,7 +41,7 @@ class _DatatypeScreenState extends State<DatatypeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.green.shade100,
+        backgroundColor: Colors.purple.shade100,
         appBar: CustomAppbar().appbar("DATA TYPES"),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
