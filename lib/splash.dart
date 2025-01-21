@@ -19,11 +19,13 @@ class _SplashScreenState extends State<SplashScreen> {
         seconds: 3,
       ),
       () {
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return IndexScreen();
-          },
-        ));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => IndexScreen(),
+          ),
+          (route) => false,
+        );
       },
     );
   }

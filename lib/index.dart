@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intern_project/custom_textstyles.dart';
 import 'package:intern_project/datatype.dart';
 
 class IndexScreen extends StatefulWidget {
@@ -16,7 +17,10 @@ class _IndexScreenState extends State<IndexScreen> {
     return Scaffold(
       body: Scaffold(
         appBar: AppBar(
-          title: Text("INDEX"),
+          title: Text(
+            "INDEX",
+            style: CustomTextStyles.appbarTextStyle,
+          ),
           centerTitle: true,
           automaticallyImplyLeading: false,
         ),

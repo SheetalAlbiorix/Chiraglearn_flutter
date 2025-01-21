@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intern_project/custom_textstyles.dart';
 
 class DatatypeScreen extends StatefulWidget {
   const DatatypeScreen({super.key});
@@ -9,18 +10,30 @@ class DatatypeScreen extends StatefulWidget {
 
 class _DatatypeScreenState extends State<DatatypeScreen> {
   var titleItems = [
-    "Integer Values",
-    "Double Values",
-    "String Values",
-    "Boolean Values",
-    "List Values"
+    "Integer :",
+    "Double :",
+    "String :",
+    "Boolean :",
+    "List :",
+    "Sets :",
+    "Maps :"
   ];
   var items = [
     10,
     10.10,
     "chirag",
     true,
-    [10, 20, 30, 40, 50]
+    [10, 20, 30, 40, 50],
+    {
+      'banana',
+      'apple',
+      'orange',
+    },
+    {
+      1: 'One',
+      2: 'Two',
+      3: 'Three',
+    },
   ];
   int integerValue = 20;
   double doubleValue = 10.20;
@@ -28,30 +41,39 @@ class _DatatypeScreenState extends State<DatatypeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Data Type page"),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              child: ListTile(
-                title: Text(titleItems[index]),
-                subtitle: Text(
-                  items[index].toString(),
-                  style: TextStyle(
-                    color: Colors.grey,
+        appBar: AppBar(
+          title: Text(
+            "Data Type page",
+            style: CustomTextStyles.appbarTextStyle,
+          ),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GridView.builder(
+            itemCount: items.length,
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemBuilder: (context, index) {
+              return Card(
+                elevation: 4,
+                child: Center(
+                  child: ListTile(
+                    title: Text(
+                      titleItems[index],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(
+                      items[index].toString(),
+                      style: TextStyle(),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
+              );
+            },
+          ),
+        ));
   }
 }
