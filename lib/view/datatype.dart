@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intern_project/custom_textstyles.dart';
+import 'package:intern_project/constants/custom_appbar.dart';
 
 class DatatypeScreen extends StatefulWidget {
   const DatatypeScreen({super.key});
@@ -41,13 +41,8 @@ class _DatatypeScreenState extends State<DatatypeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Data Type page",
-            style: CustomTextStyles.appbarTextStyle,
-          ),
-          centerTitle: true,
-        ),
+        backgroundColor: Colors.green.shade100,
+        appBar: CustomAppbar().appbar("DATA TYPES"),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: GridView.builder(
