@@ -2,6 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:intern_project/view/splash.dart';
 
 void main() {
+  double a = 4.5;
+  int b = 2;
+
+  print("abs() - ${a.abs()}");
+  print("ceil() - ${a.ceil()}");
+  print("floor() - ${a.floor()}");
+  print("compareTo() - ${a.compareTo(b)}");
+  print("remainder() - ${a.remainder(b)}");
+  print("round() - ${a.round()}");
+  print("toDouble() - ${a.toDouble()}");
+  print("toInt() - ${a.toInt()}");
+  print("toString() - ${a.toString()}");
+  print("truncate() - ${a.truncate()}");
+
   runApp(const MyApp());
 }
 
