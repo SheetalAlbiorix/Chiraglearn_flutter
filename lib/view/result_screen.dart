@@ -47,7 +47,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
   absFunction() {
     setState(() {
-      result = num.Parse(controller1.text)?.abs();
+      result = num.parse(controller1.text).abs();
     });
     print(result);
 
