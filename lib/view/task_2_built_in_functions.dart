@@ -27,45 +27,42 @@ class _BuiltInFunctionsState extends State<BuiltInFunctions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar().appbar("Built in Functions", true),
+      resizeToAvoidBottomInset: false,
+      appBar: CustomAppbar.appbar("Built in Functions", true),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Card(
-          color: Colors.red.shade50,
-          elevation: 4,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GridView.builder(
-              itemCount: functions.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-              itemBuilder: (context, index) {
-                return InkWell(
-                  overlayColor:
-                      WidgetStatePropertyAll(WidgetStateColor.transparent),
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return ResultScreen(
-                          single: index == 3 || index == 4 ? !single : single,
-                          functionName: functions[index],
-                          indexNo: index,
-                        );
-                      },
-                    ));
-                  },
-                  child: Card(
-                    elevation: 4,
-                    child: Center(
-                      child: Text(
-                        functions[index],
-                      ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GridView.builder(
+            itemCount: functions.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+            ),
+            itemBuilder: (context, index) {
+              return InkWell(
+                overlayColor:
+                    WidgetStatePropertyAll(WidgetStateColor.transparent),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return ResultScreen(
+                        single: index == 3 || index == 4 ? !single : single,
+                        functionName: functions[index],
+                        indexNo: index,
+                      );
+                    },
+                  ));
+                },
+                child: Card(
+                  elevation: 4,
+                  child: Center(
+                    child: Text(
+                      functions[index],
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),

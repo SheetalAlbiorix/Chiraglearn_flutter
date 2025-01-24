@@ -18,6 +18,7 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
+  final _formKey = GlobalKey<FormState>();
   bool isPress = false;
 
   @override
@@ -46,7 +47,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
   absFunction() {
     setState(() {
-      result = double.parse(controller1.text).abs();
+      result = num.Parse(controller1.text)?.abs();
     });
     print(result);
 
@@ -79,8 +80,8 @@ class _ResultScreenState extends State<ResultScreen> {
 
   remainderFunction() {
     setState(() {
-      result = double.parse(controller1.text)
-          .remainder(double.parse(controller2.text));
+      result =
+          num.parse(controller1.text).remainder(num.parse(controller2.text));
     });
     print(result);
 
@@ -138,18 +139,27 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar().appbar("${widget.functionName} function", true),
+      appBar: CustomAppbar.appbar("${widget.functionName} function", true),
       body: SingleChildScrollView(
+        // physics: ClampingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(8),
-          child: Card(
-            color: Colors.red.shade50,
-            elevation: 4,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Form(
+              key: _formKey,
               child: Column(
                 children: [
                   TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        setState(() {
+                          result = "";
+                        });
+                        return "please enter value";
+                      }
+                      return null;
+                    },
                     controller: controller1,
                     keyboardType: TextInputType.numberWithOptions(
                         decimal: true, signed: true),
@@ -167,6 +177,12 @@ class _ResultScreenState extends State<ResultScreen> {
                               height: 10,
                             ),
                             TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "please enter value";
+                                }
+                                return null;
+                              },
                               controller: controller2,
                               keyboardType: TextInputType.numberWithOptions(
                                   decimal: true, signed: true),
@@ -190,34 +206,36 @@ class _ResultScreenState extends State<ResultScreen> {
                     children: [
                       ElevatedButton(
                           onPressed: () {
-                            setState(() {
-                              isPress = true;
-                            });
-                            if (widget.indexNo == 0) {
-                              print("clicked!");
-                              absFunction();
-                            } else if (widget.indexNo == 1) {
-                              print("clicked!");
-                              ceilFunction();
-                            } else if (widget.indexNo == 2) {
-                              print("clicked!");
-                              floorFunction();
-                            } else if (widget.indexNo == 3) {
-                              print("clicked!");
-                              compareToFunction();
-                            } else if (widget.indexNo == 4) {
-                              print("clicked!");
-                              remainderFunction();
-                            } else if (widget.indexNo == 5) {
-                              roundFunction();
-                            } else if (widget.indexNo == 6) {
-                              toDoubleFunction();
-                            } else if (widget.indexNo == 7) {
-                              toIntFunction();
-                            } else if (widget.indexNo == 8) {
-                              toStringFunction();
-                            } else {
-                              truncateFunction();
+                            if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                isPress = true;
+                              });
+                              if (widget.indexNo == 0) {
+                                print("clicked!");
+                                absFunction();
+                              } else if (widget.indexNo == 1) {
+                                print("clicked!");
+                                ceilFunction();
+                              } else if (widget.indexNo == 2) {
+                                print("clicked!");
+                                floorFunction();
+                              } else if (widget.indexNo == 3) {
+                                print("clicked!");
+                                compareToFunction();
+                              } else if (widget.indexNo == 4) {
+                                print("clicked!");
+                                remainderFunction();
+                              } else if (widget.indexNo == 5) {
+                                roundFunction();
+                              } else if (widget.indexNo == 6) {
+                                toDoubleFunction();
+                              } else if (widget.indexNo == 7) {
+                                toIntFunction();
+                              } else if (widget.indexNo == 8) {
+                                toStringFunction();
+                              } else {
+                                truncateFunction();
+                              }
                             }
                           },
                           child: Padding(
