@@ -143,183 +143,174 @@ class _ResultScreenState extends State<ResultScreen> {
       body: SingleChildScrollView(
         // physics: ClampingScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        setState(() {
-                          result = "";
-                        });
-                        return "please enter value";
-                      }
-                      return null;
-                    },
-                    controller: controller1,
-                    keyboardType: TextInputType.numberWithOptions(
-                        decimal: true, signed: true),
-                    decoration: InputDecoration(
-                      hintText: "Enter Value",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+          padding: const EdgeInsets.all(15),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      setState(() {
+                        result = "";
+                      });
+                      return "please enter value";
+                    }
+                    return null;
+                  },
+                  controller: controller1,
+                  keyboardType: TextInputType.numberWithOptions(
+                      decimal: true, signed: true),
+                  decoration: InputDecoration(
+                    hintText: "Enter Value",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  widget.single == false
-                      ? Column(
-                          children: [
-                            SizedBox(
-                              height: 10,
-                            ),
-                            TextFormField(
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "please enter value";
-                                }
-                                return null;
-                              },
-                              controller: controller2,
-                              keyboardType: TextInputType.numberWithOptions(
-                                  decimal: true, signed: true),
-                              decoration: InputDecoration(
-                                hintText: "Enter Value",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ],
-                        )
-                      : Container(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Column(
+                ),
+                Visibility(
+                  visible: !widget.single,
+                  child: Column(
                     children: [
-                      ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              setState(() {
-                                isPress = true;
-                              });
-                              if (widget.indexNo == 0) {
-                                print("clicked!");
-                                absFunction();
-                              } else if (widget.indexNo == 1) {
-                                print("clicked!");
-                                ceilFunction();
-                              } else if (widget.indexNo == 2) {
-                                print("clicked!");
-                                floorFunction();
-                              } else if (widget.indexNo == 3) {
-                                print("clicked!");
-                                compareToFunction();
-                              } else if (widget.indexNo == 4) {
-                                print("clicked!");
-                                remainderFunction();
-                              } else if (widget.indexNo == 5) {
-                                roundFunction();
-                              } else if (widget.indexNo == 6) {
-                                toDoubleFunction();
-                              } else if (widget.indexNo == 7) {
-                                toIntFunction();
-                              } else if (widget.indexNo == 8) {
-                                toStringFunction();
-                              } else {
-                                truncateFunction();
-                              }
-                            }
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Text("output"),
-                          )),
                       SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
-                      Column(
-                        children: [
-                          widget.indexNo == 0
-                              ? Text(
-                                  "==> Returns the absolute value of a number. \n\n==> The absolute value of a number is the number without its sign.",
-                                )
-                              : Container(),
-                          widget.indexNo == 1
-                              ? Text(
-                                  "==> The ceil() function in Dart returns the nearest smallest integer value greater than or equal to a number.",
-                                )
-                              : Container(),
-                          widget.indexNo == 2
-                              ? Text(
-                                  "==> The floor() function in Dart returns the next largest integer that is less than or equal to a specified number.",
-                                )
-                              : Container(),
-                          widget.indexNo == 3
-                              ? Text(
-                                  " 0 − when the strings are equal.\n 1 − when the first string is greater than the second \n-1 − when the first string is smaller than the second",
-                                )
-                              : Container(),
-                          widget.indexNo == 4
-                              ? Text(
-                                  "It returns the truncated remainder after dividing the two numbers.",
-                                )
-                              : Container(),
-                          widget.indexNo == 5
-                              ? Text(
-                                  "==> The integer closest to this number.\n\n==> Rounds away from zero when there is no closest integer: (3.5).round() == 4 and (-3.5).round() == -4.",
-                                )
-                              : Container(),
-                          widget.indexNo == 6
-                              ? Text(
-                                  "==> This method returns the double representation of the number's value.\n\n==> Returns a double representing the specified Number object.",
-                                )
-                              : Container(),
-                          widget.indexNo == 7
-                              ? Text(
-                                  "==> The toInt() function converts the number to an integer and returns it.",
-                                )
-                              : Container(),
-                          widget.indexNo == 8
-                              ? Text(
-                                  "==> Returns a string representation of an object.",
-                                )
-                              : Container(),
-                          widget.indexNo == 9
-                              ? Text(
-                                  "==> Returns the integer obtained by discarding any fractional part of this number.",
-                                )
-                              : Container(),
-                          SizedBox(
-                            height: 20,
+                      TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "please enter value";
+                          }
+                          return null;
+                        },
+                        controller: controller2,
+                        keyboardType: TextInputType.numberWithOptions(
+                            decimal: true, signed: true),
+                        decoration: InputDecoration(
+                          hintText: "Enter Value",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          isPress
-                              ? AnimatedContainer(
-                                  duration: Duration(seconds: 2),
-                                  curve: Curves.easeOut,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                        color: Colors.green,
-                                      )),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12),
-                                    child: Text("Answer : $result"),
-                                  ))
-                              : Container(),
-                        ],
-                      )
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Column(
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              isPress = true;
+                            });
+                            if (widget.indexNo == 0) {
+                              print("clicked!");
+                              absFunction();
+                            } else if (widget.indexNo == 1) {
+                              print("clicked!");
+                              ceilFunction();
+                            } else if (widget.indexNo == 2) {
+                              print("clicked!");
+                              floorFunction();
+                            } else if (widget.indexNo == 3) {
+                              print("clicked!");
+                              compareToFunction();
+                            } else if (widget.indexNo == 4) {
+                              print("clicked!");
+                              remainderFunction();
+                            } else if (widget.indexNo == 5) {
+                              roundFunction();
+                            } else if (widget.indexNo == 6) {
+                              toDoubleFunction();
+                            } else if (widget.indexNo == 7) {
+                              toIntFunction();
+                            } else if (widget.indexNo == 8) {
+                              toStringFunction();
+                            } else {
+                              truncateFunction();
+                            }
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Text("output"),
+                        )),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Column(
+                      children: [
+                        widget.indexNo == 0
+                            ? Text(
+                                "==> Returns the absolute value of a number. \n\n==> The absolute value of a number is the number without its sign.",
+                              )
+                            : widget.indexNo == 1
+                                ? Text(
+                                    "==> The ceil() function in Dart returns the nearest smallest integer value greater than or equal to a number.",
+                                  )
+                                : widget.indexNo == 2
+                                    ? Text(
+                                        "==> The floor() function in Dart returns the next largest integer that is less than or equal to a specified number.",
+                                      )
+                                    : widget.indexNo == 3
+                                        ? Text(
+                                            " 0 − when the strings are equal.\n 1 − when the first string is greater than the second \n-1 − when the first string is smaller than the second",
+                                          )
+                                        : widget.indexNo == 4
+                                            ? Text(
+                                                "It returns the truncated remainder after dividing the two numbers.",
+                                              )
+                                            : widget.indexNo == 5
+                                                ? Text(
+                                                    "==> The integer closest to this number.\n\n==> Rounds away from zero when there is no closest integer: (3.5).round() == 4 and (-3.5).round() == -4.",
+                                                  )
+                                                : widget.indexNo == 6
+                                                    ? Text(
+                                                        "==> This method returns the double representation of the number's value.\n\n==> Returns a double representing the specified Number object.",
+                                                      )
+                                                    : widget.indexNo == 7
+                                                        ? Text(
+                                                            "==> The toInt() function converts the number to an integer and returns it.",
+                                                          )
+                                                        : widget.indexNo == 8
+                                                            ? Text(
+                                                                "==> Returns a string representation of an object.",
+                                                              )
+                                                            : widget.indexNo ==
+                                                                    9
+                                                                ? Text(
+                                                                    "==> Returns the integer obtained by discarding any fractional part of this number.",
+                                                                  )
+                                                                : Container(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Visibility(
+                          visible: isPress,
+                          child: AnimatedContainer(
+                              duration: Duration(seconds: 2),
+                              curve: Curves.easeOut,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                    color: Colors.green,
+                                  )),
+                              child: Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Text("Answer : $result"),
+                              )),
+                        )
+                      ],
+                    )
+                  ],
+                )
+              ],
             ),
           ),
         ),
