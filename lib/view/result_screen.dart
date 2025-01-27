@@ -5,13 +5,22 @@ import 'package:intern_project/constants/custom_text_styles.dart';
 class ResultScreen extends StatefulWidget {
   final String iconText;
 
-  ResultScreen({super.key, required this.iconText});
+  const ResultScreen({super.key, required this.iconText});
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
 }
 
 class _ResultScreenState extends State<ResultScreen> {
+  @override
+  void dispose() {
+    controller1.dispose();
+    controller2.dispose();
+    super.dispose();
+  }
+
+  bool isVisible = false;
+
   TextEditingController controller1 = TextEditingController();
 
   TextEditingController controller2 = TextEditingController();
@@ -35,6 +44,30 @@ class _ResultScreenState extends State<ResultScreen> {
     });
   }
 
+  multiply() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+    setState(() {
+      result = (a * b).toString();
+    });
+  }
+
+  divide() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+    setState(() {
+      result = (a / b).toString();
+    });
+  }
+
+  modulo() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+    setState(() {
+      result = (a % b).toString();
+    });
+  }
+
   String? result;
 
   @override
@@ -48,9 +81,6 @@ class _ResultScreenState extends State<ResultScreen> {
           child: Column(
             children: [
               TextFormField(
-                onChanged: (value) {
-                  setState(() {});
-                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "please enter any value";
@@ -61,6 +91,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 keyboardType: TextInputType.numberWithOptions(
                     signed: true, decimal: true),
                 decoration: InputDecoration(
+                  hintText: "Enter value ",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12)),
                 ),
@@ -80,6 +111,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 keyboardType: TextInputType.numberWithOptions(
                     signed: true, decimal: true),
                 decoration: InputDecoration(
+                  hintText: "Enter value ",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12)),
                 ),
@@ -89,11 +121,21 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
               ElevatedButton(
                   onPressed: () {
+                    print("controller2.text: ${controller2.text}");
                     if (_key.currentState!.validate()) {
+                      setState(() {
+                        isVisible = true;
+                      });
                       if (widget.iconText == "+") {
                         add();
                       } else if (widget.iconText == "-") {
                         subtract();
+                      } else if (widget.iconText == "*") {
+                        multiply();
+                      } else if (widget.iconText == "/") {
+                        divide();
+                      } else {
+                        modulo();
                       }
                     }
                   },
@@ -101,9 +143,7 @@ class _ResultScreenState extends State<ResultScreen> {
               SizedBox(
                 height: 20,
               ),
-              controller1.text.isEmpty || controller2.text.isEmpty
-                  ? Container()
-                  : Text("Result: $result")
+              Visibility(visible: isVisible, child: Text("Result: $result"))
             ],
           ),
         ),

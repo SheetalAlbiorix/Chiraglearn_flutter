@@ -34,6 +34,8 @@ class Arithmetic extends StatelessWidget {
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
             itemBuilder: (context, index) {
               return InkWell(
+                overlayColor:
+                    WidgetStatePropertyAll(WidgetStateColor.transparent),
                 onTap: () {
                   Navigator.push(
                       context,
