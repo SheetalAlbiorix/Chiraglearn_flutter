@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intern_project/constants/custom_appbar.dart';
 
-class DatatypeScreen extends StatefulWidget {
-  const DatatypeScreen({super.key});
-
-  @override
-  State<DatatypeScreen> createState() => _DatatypeScreenState();
-}
-
-class _DatatypeScreenState extends State<DatatypeScreen> {
-  var titleItems = [
+class DatatypeScreen extends StatelessWidget {
+  final titleItems = [
     "Integer :",
     "Double :",
     "String :",
@@ -18,7 +11,7 @@ class _DatatypeScreenState extends State<DatatypeScreen> {
     "Sets :",
     "Maps :"
   ];
-  var items = [
+  final items = [
     10,
     10.10,
     "chirag",
@@ -35,14 +28,14 @@ class _DatatypeScreenState extends State<DatatypeScreen> {
       3: 'Three',
     },
   ];
-  int integerValue = 20;
-  double doubleValue = 10.20;
+
+  DatatypeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.purple.shade100,
-        appBar: CustomAppbar().appbar("DATA TYPES"),
+        appBar: CustomAppbar.appbar("DATA TYPES"),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: GridView.builder(

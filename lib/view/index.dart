@@ -3,21 +3,16 @@ import 'package:intern_project/constants/custom_appbar.dart';
 import 'package:intern_project/constants/custom_textstyles.dart';
 import 'package:intern_project/view/datatype.dart';
 
-class IndexScreen extends StatefulWidget {
-  const IndexScreen({super.key});
-
-  @override
-  State<IndexScreen> createState() => _IndexScreenState();
-}
-
-class _IndexScreenState extends State<IndexScreen> {
+class IndexScreen extends StatelessWidget {
   var taskItems = ["Task 1 - Data Type Task"];
+
+  IndexScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.purple.shade100,
-      appBar: CustomAppbar().appbar("INDEX"),
+      appBar: CustomAppbar.appbar("INDEX"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
@@ -37,7 +32,7 @@ class _IndexScreenState extends State<IndexScreen> {
                 child: ListTile(
                   title: Text(
                     taskItems[index],
-                    style: CustomTextStyles().normalTextStyle,
+                    style: CustomTextStyles.normalTextStyle,
                   ),
                 ),
               ),

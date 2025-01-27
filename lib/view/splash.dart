@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intern_project/constants/image_path.dart';
 import 'package:intern_project/view/index.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Image(
       image: AssetImage(
-        "assets/images/splash_image.jpg",
+        ImagesPath.splash,
       ),
       fit: BoxFit.cover,
     );
