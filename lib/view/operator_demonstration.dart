@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:intern_project/constants/custom_appbar.dart';
 import 'package:intern_project/constants/custom_text_styles.dart';
 import 'package:intern_project/view/arithmetic.dart';
+import 'package:intern_project/view/assignment.dart';
+import 'package:intern_project/view/bitwise.dart';
+import 'package:intern_project/view/cascade_notation.dart';
+import 'package:intern_project/view/conditional.dart';
+import 'package:intern_project/view/logical.dart';
 import 'package:intern_project/view/relational.dart';
+import 'package:intern_project/view/type_test.dart';
 
 class OperatorDemonstration extends StatelessWidget {
   OperatorDemonstration({super.key});
@@ -23,6 +29,7 @@ class OperatorDemonstration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: CustomAppbar.appbar("Operator Demonstration", false),
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -52,7 +59,33 @@ class OperatorDemonstration extends StatelessWidget {
                                     ? Relational(
                                         title: operatorListItems[index],
                                       )
-                                    : Container();
+                                    : index == 2
+                                        ? TypeTest(
+                                            title: operatorListItems[index],
+                                          )
+                                        : index == 3
+                                            ? Bitwise(
+                                                title: operatorListItems[index])
+                                            : index == 4
+                                                ? Assignment(
+                                                    title: operatorListItems[
+                                                        index])
+                                                : index == 5
+                                                    ? Logical(
+                                                        title:
+                                                            operatorListItems[
+                                                                index])
+                                                    : index == 6
+                                                        ? Conditional(
+                                                            title:
+                                                                operatorListItems[
+                                                                    index])
+                                                        : index == 7
+                                                            ? CascadeNotation(
+                                                                title:
+                                                                    operatorListItems[
+                                                                        index])
+                                                            : Container();
                           },
                         ),
                       );

@@ -1,4 +1,4 @@
 class ImagesPath {
   //splash
-  static String splash = "assets/images/splash_image.jpg";
+  static const String splash = "assets/images/splash_image.jpg";
 }

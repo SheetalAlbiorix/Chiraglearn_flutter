@@ -16,6 +16,7 @@ class _ResultScreenState extends State<ResultScreen> {
   void dispose() {
     controller1.dispose();
     controller2.dispose();
+
     super.dispose();
   }
 
@@ -26,6 +27,74 @@ class _ResultScreenState extends State<ResultScreen> {
   TextEditingController controller2 = TextEditingController();
 
   final _key = GlobalKey<FormState>();
+
+  equal() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+    setState(() {
+      if (a == b) {
+        result = "value 1 equal to value 2";
+      } else {
+        result = "value 1 is not equal to value 2";
+      }
+    });
+  }
+
+  notEqual() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+    setState(() {
+      if (a != b) {
+        result = "value 1 is not equal to value 2";
+      } else {
+        result = "value 1 equal to value 2";
+      }
+    });
+  }
+
+  lessThan() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+
+    if (a < b) {
+      result = "value1 is less than value2";
+    } else {
+      result = "value1 is not less than value2";
+    }
+  }
+
+  lessThanOrEqual() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+
+    if (a <= b) {
+      result = "value1 is less than or equal to value2";
+    } else {
+      result = "value1 is not less than or equal to value2";
+    }
+  }
+
+  greaterThan() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+
+    if (a > b) {
+      result = "value1 is Greater than value2";
+    } else {
+      result = "value1 is not Greater than value2";
+    }
+  }
+
+  greaterThanOrEqual() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+
+    if (a >= b) {
+      result = "value1 is Greater than or equal to value2";
+    } else {
+      result = "value1 is not Greater than or equal to value2";
+    }
+  }
 
   add() {
     var a = double.parse(controller1.text);
@@ -109,7 +178,9 @@ class _ResultScreenState extends State<ResultScreen> {
                 },
                 controller: controller2,
                 keyboardType: TextInputType.numberWithOptions(
-                    signed: true, decimal: true),
+                  signed: true,
+                  decimal: true,
+                ),
                 decoration: InputDecoration(
                   hintText: "Enter value ",
                   border: OutlineInputBorder(
@@ -121,7 +192,6 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    print("controller2.text: ${controller2.text}");
                     if (_key.currentState!.validate()) {
                       setState(() {
                         isVisible = true;
@@ -134,9 +204,23 @@ class _ResultScreenState extends State<ResultScreen> {
                         multiply();
                       } else if (widget.iconText == "/") {
                         divide();
+                      } else if (widget.iconText == "==") {
+                        equal();
+                      } else if (widget.iconText == "!=") {
+                        notEqual();
+                      } else if (widget.iconText == "<") {
+                        lessThan();
+                      } else if (widget.iconText == ">") {
+                        greaterThan();
+                      } else if (widget.iconText == "<=") {
+                        lessThanOrEqual();
+                      } else if (widget.iconText == ">=") {
+                        greaterThanOrEqual();
                       } else {
                         modulo();
                       }
+                    } else {
+                      print("Not validated!");
                     }
                   },
                   child: Text("Submit")),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intern_project/constants/custom_appbar.dart';
 import 'package:intern_project/constants/custom_text_styles.dart';
+import 'package:intern_project/view/result_screen.dart';
 
 class Relational extends StatelessWidget {
   final String title;
@@ -27,21 +28,34 @@ class Relational extends StatelessWidget {
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
           itemBuilder: (context, index) {
-            return Card(
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      iconListItem[index],
-                      style: CustomTextStyles.appbarTextStyle,
-                    ),
-                    Text(
-                      textAlign: TextAlign.center,
-                      titleListItem[index],
-                      style: CustomTextStyles.normalTextStyle,
-                    )
-                  ],
+            return InkWell(
+              overlayColor:
+                  WidgetStatePropertyAll(WidgetStateColor.transparent),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return ResultScreen(
+                      iconText: iconListItem[index],
+                    );
+                  },
+                ));
+              },
+              child: Card(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        iconListItem[index],
+                        style: CustomTextStyles.appbarTextStyle,
+                      ),
+                      Text(
+                        textAlign: TextAlign.center,
+                        titleListItem[index],
+                        style: CustomTextStyles.normalTextStyle,
+                      )
+                    ],
+                  ),
                 ),
               ),
             );
