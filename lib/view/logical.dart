@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intern_project/constants/custom_appbar.dart';
 import 'package:intern_project/constants/custom_text_styles.dart';
+import 'package:intern_project/view/result_screen.dart';
 
 class Logical extends StatelessWidget {
   final String title;
@@ -22,20 +23,32 @@ class Logical extends StatelessWidget {
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
           itemBuilder: (context, index) {
-            return Card(
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      iconText[index],
-                      style: CustomTextStyles.appbarTextStyle,
-                    ),
-                    Text(
-                      titleText[index],
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+            return InkWell(
+              overlayColor:
+                  WidgetStatePropertyAll(WidgetStateColor.transparent),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ResultScreen(iconText: iconText[index]),
+                    ));
+              },
+              child: Card(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        iconText[index],
+                        style: CustomTextStyles.appbarTextStyle,
+                      ),
+                      Text(
+                        titleText[index],
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

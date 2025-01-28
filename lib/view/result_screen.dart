@@ -28,6 +28,39 @@ class _ResultScreenState extends State<ResultScreen> {
 
   final _key = GlobalKey<FormState>();
 
+  logicalAnd() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+
+    if (a < b && a <= b) {
+      result = "value 1 is less than and less than equal to value 2";
+    } else {
+      result = "value 1 is greater than or equal to value 2";
+    }
+  }
+
+  logicalOr() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+
+    if (a < b || a <= b) {
+      result = "value 1 is less than and less than equal to value 2";
+    } else {
+      result = "value 1 is greater than  value 2";
+    }
+  }
+
+  logicalNot() {
+    var a = double.parse(controller1.text);
+    var b = double.parse(controller2.text);
+
+    if (!(a > b)) {
+      result = "value 1 is less than and less than equal to value 2";
+    } else {
+      result = "value 1 is greater than value 2";
+    }
+  }
+
   equal() {
     var a = double.parse(controller1.text);
     var b = double.parse(controller2.text);
@@ -216,6 +249,12 @@ class _ResultScreenState extends State<ResultScreen> {
                         lessThanOrEqual();
                       } else if (widget.iconText == ">=") {
                         greaterThanOrEqual();
+                      } else if (widget.iconText == "&&") {
+                        logicalAnd();
+                      } else if (widget.iconText == "!") {
+                        logicalNot();
+                      } else if (widget.iconText == "||") {
+                        logicalOr();
                       } else {
                         modulo();
                       }
