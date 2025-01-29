@@ -5,12 +5,11 @@ import 'package:intern_project/constants/custom_textstyles.dart';
 class IndexScreen extends StatelessWidget {
   IndexScreen({super.key});
 
-  final taskItems = ["Task 1 - Data Type Task"];
+  final taskItems = ["Task 4 - Car Module using Enums,Sets,Queue,DataTypes"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple.shade100,
       appBar: CustomAppbar.appbar("INDEX"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
