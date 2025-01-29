@@ -10,7 +10,6 @@ class IndexScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple.shade100,
       appBar: CustomAppbar.appbar("INDEX"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
