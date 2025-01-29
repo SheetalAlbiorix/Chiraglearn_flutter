@@ -22,20 +22,83 @@ class Conditional extends StatelessWidget {
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemBuilder: (context, index) {
-            return Card(
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      iconText[index],
-                      style: CustomTextStyles.appbarTextStyle,
-                    ),
-                    Text(
-                      titleText[index],
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+            return InkWell(
+              onTap: () {
+                index == 0
+                    ? showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Center(
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "Ternary operator",
+                                      style: CustomTextStyles.appbarTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "if(a <= 10) ? Number is less than or equal to 10 : Number is Greater than 10",
+                                      style: CustomTextStyles.normalTextStyle,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    : showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Center(
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "if null operator",
+                                      style: CustomTextStyles.appbarTextStyle,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "int? age; int userAge = age ?? 18 // assigns age 18 if age is null",
+                                      style: CustomTextStyles.normalTextStyle,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+              },
+              overlayColor:
+                  WidgetStatePropertyAll(WidgetStateColor.transparent),
+              child: Card(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        iconText[index],
+                        style: CustomTextStyles.appbarTextStyle,
+                      ),
+                      Text(
+                        titleText[index],
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
