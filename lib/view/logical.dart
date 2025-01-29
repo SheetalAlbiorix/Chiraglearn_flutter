@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intern_project/constants/custom_appbar.dart';
 import 'package:intern_project/constants/custom_text_styles.dart';
-import 'package:intern_project/view/result_screen.dart';
+import 'package:intern_project/view/result_logical.dart';
 
 class Logical extends StatelessWidget {
   final String title;
@@ -30,8 +30,9 @@ class Logical extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          ResultScreen(iconText: iconText[index]),
+                      builder: (context) => ResultLogical(
+                        iconText: iconText[index],
+                      ),
                     ));
               },
               child: Card(
