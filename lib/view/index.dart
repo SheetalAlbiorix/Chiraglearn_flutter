@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intern_project/constants/custom_appbar.dart';
 import 'package:intern_project/constants/custom_textstyles.dart';
+import 'package:intern_project/view/car_module.dart';
 
 class IndexScreen extends StatelessWidget {
   IndexScreen({super.key});
@@ -10,7 +11,7 @@ class IndexScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar.appbar("INDEX"),
+      appBar: CustomAppbar.appbar("INDEX", true),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
@@ -21,7 +22,7 @@ class IndexScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return Container();
+                    return CarModule();
                   },
                 ));
               },
