@@ -6,7 +6,7 @@ import 'package:intern_project/view/screen.dart';
 class IndexScreen extends StatelessWidget {
   IndexScreen({super.key});
 
-  final taskItems = ["Task 1 - Data Type Task"];
+  final taskItems = ["Task 5 - Teammates Details using switch"];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class IndexScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return DemoClass();
+                    return Teammates();
                   },
                 ));
               },
