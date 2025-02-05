@@ -4,14 +4,14 @@ import 'package:intern_project/constants/custom_textstyles.dart';
 import 'package:intern_project/constants/image_path.dart';
 import 'package:intern_project/constants/string_constants.dart';
 
-class Teammates extends StatefulWidget {
-  const Teammates({super.key});
+class TeamDetailsUsingMethod extends StatefulWidget {
+  const TeamDetailsUsingMethod({super.key});
 
   @override
-  State<Teammates> createState() => _TeammatesState();
+  State<TeamDetailsUsingMethod> createState() => _TeamDetailsUsingMethodState();
 }
 
-class _TeammatesState extends State<Teammates> {
+class _TeamDetailsUsingMethodState extends State<TeamDetailsUsingMethod> {
   static final List<String> teamMatesListItems = [
     "Allence Vakhariya",
     "Chiragkumar Gohil",

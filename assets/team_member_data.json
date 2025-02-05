@@ -1,0 +1,179 @@
+[
+  {
+    "id": 1,
+    "emp_id": "AT0007",
+    "name": "Sheetal Gajjar",
+    "profile": "assets/images/sheetal.jpg",
+    "position": "Mobile Project Manager",
+    "email": "sheetal.albiorix@gmail.com",
+    "mobile": "9909789956",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 2,
+    "emp_id": "AT167",
+    "name": "Anant Prajapati",
+    "profile": "assets/images/anant.jpg",
+    "position": "Software Engineer",
+    "email": "anantp.albiorix@gmail.com",
+    "mobile": "9428976681",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 3,
+    "emp_id": "AT165",
+    "name": "Himanshu Jawale",
+    "profile": "assets/images/himanshu.jpg",
+    "position": "Trainee Software Engineer",
+    "email": "himanshuj.albiorix@gmail.com",
+    "mobile": "9714160383",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 4,
+    "emp_id": "AT0119",
+    "name": "Palak Ramani",
+    "profile": "assets/images/palak.jpg",
+    "position": "Software Engineer",
+    "email": "palakr.albiorix@gmail.com",
+    "mobile": "8320821187",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 5,
+    "emp_id": "AT0067",
+    "name": "Mileniyam Modi",
+    "profile": "assets/images/milenniyamm.jpg",
+    "position": "Software Engineer",
+    "email": "milenniyamm.albiorix@gmail.com",
+    "mobile": "88497968951",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 6,
+    "emp_id": "AT160",
+    "name": "Raj Shah",
+    "profile": "assets/images/raj.jpg",
+    "position": "Software Engineer",
+    "email": "rajh.albiorix@gmail.com",
+    "mobile": "9409136777",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 7,
+    "emp_id": "AT0122",
+    "name": "Khush Pajwani",
+    "profile": "assets/images/khush.jpg",
+    "position": "Software Engineer",
+    "email": "khushp.albiorix@gmail.com",
+    "mobile": "9429108545",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 8,
+    "emp_id": "AT0073",
+    "name": "Sohan Bhadra",
+    "profile": "assets/images/sohan.jpg",
+    "position": "Software Engineer",
+    "email": "sohanb.albiorix@gmail.com",
+    "mobile": "9662935949",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 9,
+    "emp_id": "AT0121",
+    "name": "Shashank Adhatrao",
+    "profile": "assets/images/shashank.jpg",
+    "position": "Software Engineer",
+    "email": "shashanka.albiorix@gmail.com",
+    "mobile": "9104077165",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 10,
+    "emp_id": "AT0022",
+    "name": "Sazzadhusen Iproliya",
+    "profile": "assets/images/Sazzadhusen.jpg",
+    "position": "Team Lead",
+    "email": "sazzadhusen.albiorix@gmail.com",
+    "mobile": "9925342734",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 11,
+    "emp_id": "AT175",
+    "name": "Sarvesh Savaliya",
+    "profile": "assets/images/sarvesh.jpg",
+    "position": "Software Engineer",
+    "email": "sarveshs.albiorix@gmail.com",
+    "mobile": "9409684668",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 12,
+    "emp_id": "AT193",
+    "name": "Prachi Kotak",
+    "profile": "assets/images/prachi.jpeg",
+    "position": "Trainee Software Engineer",
+    "email": "prachik.albiorix@gmail.com",
+    "mobile": "7862020227",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 13,
+    "emp_id": "AT0050",
+    "name": "Allence Vakhariya",
+    "profile": "assets/images/allence.jpg",
+    "position": "Software Engineer",
+    "email": "allencev.albiorix@gmail.com",
+    "mobile": "7990116270",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 14,
+    "emp_id": "AT191",
+    "name": "Chiragkumar Gohil",
+    "profile": "assets/images/chirag.jpg",
+    "position": "Trainee Software Engineer",
+    "email": "chiragg.albiorix@gmail.com",
+    "mobile": "9978431633",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 15,
+    "emp_id": "AT0078",
+    "name": "Jhanvi Pathar",
+    "profile": "assets/images/jhanvi.jpg",
+    "position": "Software Engineer",
+    "email": "jhanvip.albiorix@gmail.com",
+    "mobile": "9106849593",
+    "location": "ahmedabad",
+    "department": "software"
+  },
+  {
+    "id": 16,
+    "emp_id": "AT183",
+    "name": "Krishna Barasara",
+    "profile": "",
+    "position": "Software Engineer",
+    "email": "krishnab.albiorix@gmail.com",
+    "mobile": "9879465832",
+    "location": "ahmedabad",
+    "department": "software"
+  }
+]
+

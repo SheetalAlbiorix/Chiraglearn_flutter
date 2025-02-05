@@ -11,7 +11,7 @@ class ImagesPath {
   static const sohanBhadra = "assets/images/sohan.jpg";
   static const shashankAdhatRao = "assets/images/shashank.jpg";
   static const sazzadhusenIproliya = "assets/images/Sazzadhusen.jpg";
-  static const sarveshSavaliya = "Sarvesh Savaliya";
+  static const sarveshSavaliya = "assets/images/sarvesh.jpg";
   static const prachiKotak = "assets/images/prachi.jpeg";
   static const allenceVakhariya = "assets/images/allence.jpg";
   static const chiragKumarGohil = "assets/images/chirag.jpg";

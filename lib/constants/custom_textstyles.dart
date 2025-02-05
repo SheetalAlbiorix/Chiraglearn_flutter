@@ -7,7 +7,7 @@ class CustomTextStyles {
     color: Colors.black,
   );
   static TextStyle mediumTextStyle = TextStyle(
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: FontWeight.w600,
     color: Colors.black,
   );

@@ -1,4 +1,6 @@
 class StringConstants {
+  //team details using method
+
   static const sheetalGajjar = "Sheetal Gajjar";
   static const anantPrajapati = "Anant Prajapati";
   static const himanshuJawale = "Himanshu Jawale";
@@ -15,4 +17,16 @@ class StringConstants {
   static const chiragKumarGohil = "Chiragkumar Gohil";
   static const jhanviPathar = "Jhanvi Pathar";
   static const krishnaBarasara = "Krishna Barasara";
+
+  // json assets
+  static const jsonPath = "assets/team_member_data.json";
+
+  //team details using json
+  static const employeeId = "Employee ID";
+  static const name = "Name";
+  static const position = "Position";
+  static const location = "Location";
+  static const department = "Department";
+  static const email = "Email";
+  static const mobile = "Mobile";
 }
