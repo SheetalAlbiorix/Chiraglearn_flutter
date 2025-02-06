@@ -14,7 +14,7 @@ class TeamDetailsUsingMethod extends StatefulWidget {
 class _TeamDetailsUsingMethodState extends State<TeamDetailsUsingMethod> {
   static final List<String> teamMatesListItems = [
     "Allence Vakhariya",
-    "Chiragkumar Gohil",
+    "Chirag kumar Gohil",
     "Jhanvi Pathar",
     "Krishna Barasara",
     "Prachi Kotak",

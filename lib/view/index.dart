@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intern_project/constants/custom_appbar.dart';
 import 'package:intern_project/constants/custom_textstyles.dart';
 import 'package:intern_project/view/team_details_using_json.dart';
+import 'package:intern_project/view/team_details_using_json_filter.dart';
 import 'package:intern_project/view/team_details_using_methods.dart';
 
 class IndexScreen extends StatelessWidget {
@@ -9,7 +10,8 @@ class IndexScreen extends StatelessWidget {
 
   final taskItems = [
     "Task 5.1 - Team Details Using Json",
-    "Task 5.2 - Team Details Using Method"
+    "Task 5.2 - Team Details Using Method",
+    "Task 5.3 - Team Details Using Json Filter"
   ];
 
   @override
@@ -36,7 +38,13 @@ class IndexScreen extends StatelessWidget {
                               return TeamDetailsUsingMethod();
                             },
                           ))
-                        : null;
+                        : index == 2
+                            ? Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return TeamDetailsUsingJsonFilter();
+                                },
+                              ))
+                            : null;
               },
               child: Card(
                 elevation: 4,

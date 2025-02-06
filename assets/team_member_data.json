@@ -8,7 +8,8 @@
     "email": "sheetal.albiorix@gmail.com",
     "mobile": "9909789956",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SG"
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "email": "anantp.albiorix@gmail.com",
     "mobile": "9428976681",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SI"
   },
   {
     "id": 3,
@@ -30,7 +32,8 @@
     "email": "himanshuj.albiorix@gmail.com",
     "mobile": "9714160383",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SI"
   },
   {
     "id": 4,
@@ -41,7 +44,8 @@
     "email": "palakr.albiorix@gmail.com",
     "mobile": "8320821187",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "AV"
   },
   {
     "id": 5,
@@ -52,7 +56,8 @@
     "email": "milenniyamm.albiorix@gmail.com",
     "mobile": "88497968951",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "AV"
   },
   {
     "id": 6,
@@ -63,7 +68,8 @@
     "email": "rajh.albiorix@gmail.com",
     "mobile": "9409136777",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SB"
   },
   {
     "id": 7,
@@ -74,7 +80,8 @@
     "email": "khushp.albiorix@gmail.com",
     "mobile": "9429108545",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SB"
   },
   {
     "id": 8,
@@ -85,7 +92,8 @@
     "email": "sohanb.albiorix@gmail.com",
     "mobile": "9662935949",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SG"
   },
   {
     "id": 9,
@@ -96,7 +104,8 @@
     "email": "shashanka.albiorix@gmail.com",
     "mobile": "9104077165",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SG"
   },
   {
     "id": 10,
@@ -107,7 +116,8 @@
     "email": "sazzadhusen.albiorix@gmail.com",
     "mobile": "9925342734",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SG"
   },
   {
     "id": 11,
@@ -118,7 +128,8 @@
     "email": "sarveshs.albiorix@gmail.com",
     "mobile": "9409684668",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SG"
   },
   {
     "id": 12,
@@ -129,7 +140,8 @@
     "email": "prachik.albiorix@gmail.com",
     "mobile": "7862020227",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SG"
   },
   {
     "id": 13,
@@ -140,7 +152,8 @@
     "email": "allencev.albiorix@gmail.com",
     "mobile": "7990116270",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SG"
   },
   {
     "id": 14,
@@ -151,7 +164,8 @@
     "email": "chiragg.albiorix@gmail.com",
     "mobile": "9978431633",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SG"
   },
   {
     "id": 15,
@@ -162,7 +176,8 @@
     "email": "jhanvip.albiorix@gmail.com",
     "mobile": "9106849593",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SG"
   },
   {
     "id": 16,
@@ -173,7 +188,11 @@
     "email": "krishnab.albiorix@gmail.com",
     "mobile": "9879465832",
     "location": "ahmedabad",
-    "department": "software"
+    "department": "software",
+    "team": "SG"
   }
 ]
+
+
+
 
