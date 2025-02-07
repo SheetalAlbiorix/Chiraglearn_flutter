@@ -1,4 +1,4 @@
-class StringConstants {
+class StringClass {
   //team details using method
 
   static const sheetalGajjar = "Sheetal Gajjar";
@@ -29,4 +29,8 @@ class StringConstants {
   static const department = "Department";
   static const email = "Email";
   static const mobile = "Mobile";
+
+//team details with filter
+  static const selectTeamMember = 'Please select any team member';
+  static const selectMember = 'Please select any team member';
 }

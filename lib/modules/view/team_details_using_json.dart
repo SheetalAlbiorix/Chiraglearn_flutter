@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:intern_project/constants/custom_appbar.dart';
-import 'package:intern_project/constants/custom_textstyles.dart';
-import 'package:intern_project/constants/image_path.dart';
-import 'package:intern_project/constants/string_constants.dart';
+import 'package:intern_project/modules/constants/custom_appbar.dart';
+import 'package:intern_project/modules/constants/custom_textstyles.dart';
+import 'package:intern_project/modules/constants/image_path.dart';
+import 'package:intern_project/modules/constants/string_constants.dart';
 
 class TeamDetailsUsingJson extends StatefulWidget {
   const TeamDetailsUsingJson({super.key});
@@ -18,8 +18,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
   List list = [];
 
   loadJsonData() async {
-    final String jsonData =
-        await rootBundle.loadString(StringConstants.jsonPath);
+    final String jsonData = await rootBundle.loadString(StringClass.jsonPath);
 
     List jsonList = jsonDecode(jsonData);
     setState(() {
@@ -83,7 +82,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    StringConstants.employeeId,
+                                    StringClass.employeeId,
                                     style: CustomTextStyles.mediumTextStyle,
                                   ),
                                   Text(item['emp_id']),
@@ -101,7 +100,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    StringConstants.name,
+                                    StringClass.name,
                                     style: CustomTextStyles.mediumTextStyle,
                                   ),
                                   Text(item['name']),
@@ -116,7 +115,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    StringConstants.position,
+                                    StringClass.position,
                                     style: CustomTextStyles.mediumTextStyle,
                                   ),
                                   Text(item['position']),
@@ -131,7 +130,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    StringConstants.location,
+                                    StringClass.location,
                                     style: CustomTextStyles.mediumTextStyle,
                                   ),
                                   Text(item['location']),
@@ -146,7 +145,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    StringConstants.department,
+                                    StringClass.department,
                                     style: CustomTextStyles.mediumTextStyle,
                                   ),
                                   Text(item['department']),
@@ -161,7 +160,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    StringConstants.email,
+                                    StringClass.email,
                                     style: CustomTextStyles.mediumTextStyle,
                                   ),
                                   Text(item['email']),
@@ -176,7 +175,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    StringConstants.mobile,
+                                    StringClass.mobile,
                                     style: CustomTextStyles.mediumTextStyle,
                                   ),
                                   Text(item['mobile']),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intern_project/constants/custom_appbar.dart';
-import 'package:intern_project/constants/custom_textstyles.dart';
-import 'package:intern_project/view/team_details_using_json.dart';
-import 'package:intern_project/view/team_details_using_json_filter.dart';
-import 'package:intern_project/view/team_details_using_methods.dart';
+import 'package:intern_project/modules/constants/custom_appbar.dart';
+import 'package:intern_project/modules/constants/custom_textstyles.dart';
+import 'package:intern_project/modules/view/team_details_using_json.dart';
+import 'package:intern_project/modules/view/team_details_using_json_filter.dart';
+import 'package:intern_project/modules/view/team_details_using_methods.dart';
 
 class IndexScreen extends StatelessWidget {
   IndexScreen({super.key});

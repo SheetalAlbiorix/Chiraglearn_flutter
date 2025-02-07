@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intern_project/constants/custom_appbar.dart';
-import 'package:intern_project/constants/custom_textstyles.dart';
-import 'package:intern_project/constants/image_path.dart';
-import 'package:intern_project/constants/string_constants.dart';
+import 'package:intern_project/modules/constants/custom_appbar.dart';
+import 'package:intern_project/modules/constants/custom_textstyles.dart';
+import 'package:intern_project/modules/constants/image_path.dart';
+import 'package:intern_project/modules/constants/string_constants.dart';
 
 class TeamDetailsUsingMethod extends StatefulWidget {
   const TeamDetailsUsingMethod({super.key});
@@ -41,87 +41,87 @@ class _TeamDetailsUsingMethodState extends State<TeamDetailsUsingMethod> {
 
   teamMemberDetails() {
     switch (selectedTeamMate) {
-      case StringConstants.sheetalGajjar:
+      case StringClass.sheetalGajjar:
         {
           sheetal();
         }
         break;
-      case StringConstants.anantPrajapati:
+      case StringClass.anantPrajapati:
         {
           anant();
         }
         break;
 
-      case StringConstants.himanshuJawale:
+      case StringClass.himanshuJawale:
         {
           himanshu();
         }
         break;
-      case StringConstants.palakRamani:
+      case StringClass.palakRamani:
         {
           palak();
         }
         break;
-      case StringConstants.mileniyamModi:
+      case StringClass.mileniyamModi:
         {
           mileniyam();
         }
         break;
 
-      case StringConstants.rajShah:
+      case StringClass.rajShah:
         {
           raj();
         }
         break;
 
-      case StringConstants.khushPajwani:
+      case StringClass.khushPajwani:
         {
           khush();
         }
         break;
-      case StringConstants.sohanBhadra:
+      case StringClass.sohanBhadra:
         {
           sohan();
         }
         break;
-      case StringConstants.shashankAdhatRao:
+      case StringClass.shashankAdhatRao:
         {
           shashank();
         }
         break;
 
-      case StringConstants.sazzadhusenIproliya:
+      case StringClass.sazzadhusenIproliya:
         {
           sazzadHusen();
         }
         break;
-      case StringConstants.sarveshSavaliya:
+      case StringClass.sarveshSavaliya:
         {
           sarvesh();
         }
         break;
-      case StringConstants.prachiKotak:
+      case StringClass.prachiKotak:
         {
           prachi();
         }
         break;
-      case StringConstants.allenceVakhariya:
+      case StringClass.allenceVakhariya:
         {
           allence();
         }
         break;
-      case StringConstants.chiragKumarGohil:
+      case StringClass.chiragKumarGohil:
         {
           chirag();
         }
         break;
 
-      case StringConstants.jhanviPathar:
+      case StringClass.jhanviPathar:
         {
           jhanvi();
         }
         break;
-      case StringConstants.krishnaBarasara:
+      case StringClass.krishnaBarasara:
         {
           krishna();
         }
