@@ -88,13 +88,9 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                   Text(item['emp_id']),
                                 ],
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
+                              SizedBox(height: 5),
                               Divider(),
-                              SizedBox(
-                                height: 5,
-                              ),
+                              SizedBox(height: 5),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -106,9 +102,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                   Text(item['name']),
                                 ],
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
+                              SizedBox(height: 5),
                               Divider(),
                               Row(
                                 mainAxisAlignment:
@@ -121,9 +115,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                   Text(item['position']),
                                 ],
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
+                              SizedBox(height: 5),
                               Divider(),
                               Row(
                                 mainAxisAlignment:
@@ -136,9 +128,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                   Text(item['location']),
                                 ],
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
+                              SizedBox(height: 5),
                               Divider(),
                               Row(
                                 mainAxisAlignment:
@@ -151,9 +141,7 @@ class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
                                   Text(item['department']),
                                 ],
                               ),
-                              SizedBox(
-                                height: 5,
-                              ),
+                              SizedBox(height: 5),
                               Divider(),
                               Row(
                                 mainAxisAlignment:

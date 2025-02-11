@@ -33,4 +33,8 @@ class StringClass {
 //team details with filter
   static const selectTeamMember = 'Please select any team member';
   static const selectMember = 'Please select any team member';
+
+  //TeamDetailsSearchWithFilter
+  static const appBarTitle = "Search With Filter in Team Details";
+  static const selectFilter = "Select any filter value";
 }
