@@ -1,22 +1,23 @@
 [
   {
     "technology_id": 1,
-    "name": "android"
+    "name": "Android"
   },
   {
     "technology_id": 2,
-    "name": "ios"
+    "name": "IOS"
   },
   {
     "technology_id": 3,
-    "name": "flutter"
+    "name": "Flutter"
   },
   {
     "technology_id": 4,
-    "name": "react native"
+    "name": "React Native"
   },
   {
     "technology_id": 5,
-    "name": "kmm"
+    "name": "KMM"
   }
 ]
+

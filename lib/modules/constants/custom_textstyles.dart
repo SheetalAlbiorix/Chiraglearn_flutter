@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CustomTextStyles {
-  static TextStyle appbarTextStyle = TextStyle(
+  static const TextStyle appbarTextStyle = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w700,
     color: Colors.black,
   );
-  static TextStyle mediumTextStyle = TextStyle(
+  static const TextStyle mediumTextStyle = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
     color: Colors.black,
   );
 
-  static TextStyle normalTextStyle = TextStyle(
+  static const TextStyle normalTextStyle = TextStyle(
     fontSize: 14,
+  );
+
+  static const TextStyle smallTextStyle = TextStyle(
+    fontSize: 12,
   );
 }

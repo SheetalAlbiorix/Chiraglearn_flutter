@@ -22,18 +22,30 @@ class _TeamDetailsSearchWithFilterState
   FocusNode searchFocusNode = FocusNode();
 
   List filteredDataList = [];
+  bool isVisible = false;
 
   List filterOptionList = [
     StringClass.selectValue,
-    "By EmpId",
-    "By Name",
-    "By Position",
-    "By Email",
-    "By Mobile",
-    "By Hometown",
-    "By Technologies"
+    StringClass.filterOptionEmpId,
+    StringClass.filterOptionName,
+    StringClass.filterOptionPosition,
+    StringClass.filterOptionEmail,
+    StringClass.filterOptionMobile,
+    StringClass.filterOptionHometown,
+    StringClass.filterOptionTechnologies
   ];
-  String selectedFilter = StringClass.selectValue;
+
+  List technologyOptionList = [
+    StringClass.selectValue,
+    StringClass.android,
+    StringClass.ios,
+    StringClass.flutter,
+    StringClass.reactNative,
+    StringClass.kmm,
+  ];
+  String selectedTechnologyOption = StringClass.selectValue;
+
+  String selectedFilterOption = StringClass.selectValue;
 
   @override
   void dispose() {
@@ -77,101 +89,119 @@ class _TeamDetailsSearchWithFilterState
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: TextFormField(
-                      keyboardType: selectedFilter == "By Mobile"
-                          ? TextInputType.phone
-                          : selectedFilter == "By Email"
-                              ? TextInputType.emailAddress
-                              : TextInputType.name,
-                      controller: searchController,
-                      focusNode: searchFocusNode,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "please enter something";
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        setState(() {
-                          searchController.text = value;
-
-                          if (value.isEmpty) {
-                            filteredDataList =
-                                allTeamList; // Show full list if search is empty
-                          } else if (value.isNotEmpty &&
-                              selectedFilter == StringClass.selectValue) {
-                            filteredDataList = allTeamList.where(
-                              (element) {
-                                return element.empId!
-                                        .toLowerCase()
-                                        .contains(value.toLowerCase()) ||
-                                    element.name!
-                                        .toLowerCase()
-                                        .contains(value.toLowerCase()) ||
-                                    element.position!
-                                        .toLowerCase()
-                                        .contains(value.toLowerCase()) ||
-                                    element.email!
-                                        .toLowerCase()
-                                        .contains(value.toLowerCase()) ||
-                                    element.mobile!
-                                        .toLowerCase()
-                                        .contains(value.toLowerCase()) ||
-                                    element.hometown!
-                                        .toLowerCase()
-                                        .contains(value.toLowerCase());
-                              },
-                            ).toList();
-                          } else if (value.isNotEmpty &&
-                              selectedFilter != StringClass.selectValue) {
-                            selectedFilter == "By EmpId"
-                                ? filteredDataList = allTeamList
-                                    .where(
-                                      (element) => element.empId!
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase()),
-                                    )
-                                    .toList()
-                                : selectedFilter == "By Name"
-                                    ? filteredDataList = allTeamList
-                                        .where((member) => member.name!
-                                            .toLowerCase()
-                                            .contains(value.toLowerCase()))
-                                        .toList()
-                                    : selectedFilter == "By Mobile"
-                                        ? filteredDataList = allTeamList
-                                            .where(
-                                              (element) => element.mobile!
-                                                  .toLowerCase()
-                                                  .contains(
-                                                      value.toLowerCase()),
-                                            )
-                                            .toList()
-                                        : null;
+                  Visibility(
+                    visible: selectedFilterOption ==
+                            StringClass.filterOptionTechnologies
+                        ? isVisible = false
+                        : true,
+                    child: Expanded(
+                      child: TextFormField(
+                        keyboardType: selectedFilterOption == "By Mobile"
+                            ? TextInputType.phone
+                            : selectedFilterOption == "By Email"
+                                ? TextInputType.emailAddress
+                                : TextInputType.name,
+                        controller: searchController,
+                        focusNode: searchFocusNode,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "please enter something";
                           }
-                        });
-                      },
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
+                          return null;
+                        },
+                        onChanged: (value) {
+                          setState(() {
+                            searchController.text = value;
+
+                            if (value.isEmpty) {
+                              filteredDataList =
+                                  allTeamList; // Show full list if search is empty
+                            } else if (value.isNotEmpty &&
+                                selectedFilterOption ==
+                                    StringClass.selectValue) {
+                              filteredDataList = allTeamList.where(
+                                (element) {
+                                  return element.empId!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()) ||
+                                      element.name!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()) ||
+                                      element.position!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()) ||
+                                      element.email!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()) ||
+                                      element.mobile!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()) ||
+                                      element.hometown!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase());
+                                },
+                              ).toList();
+                            } else if (value.isNotEmpty &&
+                                selectedFilterOption !=
+                                    StringClass.selectValue) {
+                              filteredDataList = allTeamList.where((element) {
+                                return selectedFilterOption == "By EmpId"
+                                    ? element.empId!
+                                        .toLowerCase()
+                                        .contains(value.toLowerCase())
+                                    : selectedFilterOption == "By Name"
+                                        ? element.name!
+                                            .toLowerCase()
+                                            .contains(value.toLowerCase())
+                                        : selectedFilterOption == "Position"
+                                            ? element.position!
+                                                .toLowerCase()
+                                                .contains(value.toLowerCase())
+                                            : selectedFilterOption == "By Email"
+                                                ? element.email!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        value.toLowerCase())
+                                                : selectedFilterOption ==
+                                                        "By Mobile"
+                                                    ? element.mobile!
+                                                        .toLowerCase()
+                                                        .contains(
+                                                            value.toLowerCase())
+                                                    : element.hometown!
+                                                        .toLowerCase()
+                                                        .contains(value
+                                                            .toLowerCase());
+                              }).toList();
+                            }
+                          });
+                        },
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          prefixIcon: Icon(Icons.search),
+                          hintText: "Search",
                         ),
-                        prefixIcon: Icon(Icons.search),
-                        hintText: "Search",
                       ),
                     ),
                   ),
                   SizedBox(
                     width: 10,
                   ),
-                  SizedBox(
-                    width: 180,
+                  Container(
+                    color: Colors.white,
+                    width: selectedFilterOption ==
+                            StringClass.filterOptionTechnologies
+                        ? 200
+                        : 170,
                     child: DropdownButtonFormField(
-                      value: selectedFilter,
+                      value: selectedFilterOption,
                       isExpanded: true,
                       dropdownColor: Colors.white,
                       decoration: InputDecoration(
-                        hoverColor: WidgetStateColor.transparent,
                         prefixIcon: Icon(Icons.filter_list_outlined),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
@@ -181,21 +211,62 @@ class _TeamDetailsSearchWithFilterState
                         (value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(
-                              value,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                            child: Text(value,
                                 overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
+                                style: CustomTextStyles.smallTextStyle),
                           );
                         },
                       ).toList(),
                       onChanged: (value) {
                         setState(() {
-                          selectedFilter = value!;
+                          selectedFilterOption = value!;
                         });
                       },
+                    ),
+                  ),
+                  Visibility(
+                      visible: selectedFilterOption ==
+                              StringClass.filterOptionTechnologies
+                          ? true
+                          : false,
+                      child: Spacer()),
+                  Visibility(
+                    visible: selectedFilterOption ==
+                            StringClass.filterOptionTechnologies
+                        ? true
+                        : false,
+                    child: Container(
+                      color: Colors.white,
+                      width: selectedFilterOption ==
+                              StringClass.filterOptionTechnologies
+                          ? 200
+                          : 170,
+                      child: DropdownButtonFormField(
+                        value: selectedTechnologyOption,
+                        isExpanded: true,
+                        dropdownColor: Colors.white,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.filter_list_outlined),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        items: technologyOptionList.map(
+                          (value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: CustomTextStyles.smallTextStyle),
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedTechnologyOption = value!;
+                          });
+                        },
+                      ),
                     ),
                   )
                 ],

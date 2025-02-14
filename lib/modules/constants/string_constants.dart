@@ -37,4 +37,17 @@ class StringClass {
   //TeamDetailsSearchWithFilter
   static const appBarTitle = "Search With Filter in Team Details";
   static const selectValue = "Select Value";
+  static const filterOptionEmpId = "By EmpId";
+  static const filterOptionName = "By Name";
+  static const filterOptionPosition = "By Position";
+  static const filterOptionEmail = "By Email";
+  static const filterOptionMobile = "By Mobile";
+  static const filterOptionHometown = "By Hometown";
+  static const filterOptionTechnologies = "By Technologies";
+
+  static const android = "Android";
+  static const ios = "IOS";
+  static const flutter = "Flutter";
+  static const reactNative = "React Native";
+  static const kmm = "KMM";
 }
