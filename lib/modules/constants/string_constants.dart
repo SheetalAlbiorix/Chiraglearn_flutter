@@ -36,5 +36,5 @@ class StringClass {
 
   //TeamDetailsSearchWithFilter
   static const appBarTitle = "Search With Filter in Team Details";
-  static const selectFilter = "Select any filter value";
+  static const selectValue = "Select Value";
 }

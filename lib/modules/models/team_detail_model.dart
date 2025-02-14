@@ -16,11 +16,11 @@ class TeamDetailsModel {
   String? empId;
   String? name;
   String? profile;
-  Position? position;
+  String? position;
   String? email;
   String? mobile;
-  Location? location;
-  Department? department;
+  String? location;
+  String? department;
   String? team;
   String? hometown;
   List<int>? technologies;
@@ -46,11 +46,11 @@ class TeamDetailsModel {
         empId: json["emp_id"],
         name: json["name"],
         profile: json["profile"],
-        position: positionValues.map[json["position"]]!,
+        position: json["position"],
         email: json["email"],
         mobile: json["mobile"],
-        location: locationValues.map[json["location"]]!,
-        department: departmentValues.map[json["department"]]!,
+        location: json["location"],
+        department: json["department"],
         team: json["team"],
         hometown: json["hometown"],
         technologies: json["technologies"] == null
@@ -63,49 +63,15 @@ class TeamDetailsModel {
         "emp_id": empId,
         "name": name,
         "profile": profile,
-        "position": positionValues.reverse[position],
+        "position": position,
         "email": email,
         "mobile": mobile,
-        "location": locationValues.reverse[location],
-        "department": departmentValues.reverse[department],
+        "location": location,
+        "department": department,
         "team": team,
         "hometown": hometown,
         "technologies": technologies == null
             ? []
             : List<dynamic>.from(technologies!.map((x) => x)),
       };
-}
-
-enum Department { SOFTWARE }
-
-final departmentValues = EnumValues({"software": Department.SOFTWARE});
-
-enum Location { AHMEDABAD }
-
-final locationValues = EnumValues({"ahmedabad": Location.AHMEDABAD});
-
-enum Position {
-  MOBILE_PROJECT_MANAGER,
-  SOFTWARE_ENGINEER,
-  TEAM_LEAD,
-  TRAINEE_SOFTWARE_ENGINEER
-}
-
-final positionValues = EnumValues({
-  "Mobile Project Manager": Position.MOBILE_PROJECT_MANAGER,
-  "Software Engineer": Position.SOFTWARE_ENGINEER,
-  "Team Lead": Position.TEAM_LEAD,
-  "Trainee Software Engineer": Position.TRAINEE_SOFTWARE_ENGINEER
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }
