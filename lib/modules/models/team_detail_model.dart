@@ -72,6 +72,6 @@ class TeamDetailsModel {
         "hometown": hometown,
         "technologies": technologies == null
             ? []
-            : List<dynamic>.from(technologies!.map((x) => x)),
+            : List<dynamic>.from(technologies.map((x) => x)),
       };
 }

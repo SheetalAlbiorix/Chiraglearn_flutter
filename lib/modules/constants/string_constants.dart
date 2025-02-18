@@ -30,6 +30,7 @@ class StringClass {
   static const email = "Email";
   static const mobile = "Mobile";
   static const homeTown = "Hometown";
+  static const technologies = "Technology";
 
 //team details with filter
   static const selectTeamMember = 'Please select any team member';

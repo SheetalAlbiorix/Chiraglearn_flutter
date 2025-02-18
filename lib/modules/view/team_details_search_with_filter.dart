@@ -93,28 +93,31 @@ class _TeamDetailsSearchWithFilterState
   bool isLoading = false;
 
   Future<void> loadJson() async {
-    isLoading = true;
+    setState(() => isLoading = true);
 
-    String teamMemberJsonString =
-        await rootBundle.loadString("assets/team_member_data.json");
-    var teamMemberJsonList = jsonDecode(teamMemberJsonString);
+    try {
+      String teamMemberJsonString =
+          await rootBundle.loadString("assets/team_member_data.json");
+      var teamMemberJsonList = jsonDecode(teamMemberJsonString);
 
-    String technologyJsonString =
-        await rootBundle.loadString("assets/technology.json");
+      String technologyJsonString =
+          await rootBundle.loadString("assets/technology.json");
 
-    var technologyJsonList = jsonDecode(technologyJsonString);
+      var technologyJsonList = jsonDecode(technologyJsonString);
 
-    setState(() {
       allTeamList = teamMemberJsonList
           .map<TeamDetailsModel>((json) => TeamDetailsModel.fromJson(json))
           .toList();
-      filteredDataList = allTeamList;
+      filteredDataList = List.from(allTeamList);
 
       technologyList = technologyJsonList
           .map<TechnologyModel>((json) => TechnologyModel.fromJson(json))
           .toList();
-    });
-    isLoading = false;
+    } catch (e) {
+      e.toString();
+    }
+
+    setState(() => isLoading = false);
   }
 
   @override
@@ -127,11 +130,11 @@ class _TeamDetailsSearchWithFilterState
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppbar.appbar(StringClass.appBarTitle, true),
-        body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Row(
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
@@ -160,6 +163,7 @@ class _TeamDetailsSearchWithFilterState
                       onChanged: (value) {
                         setState(() {
                           selectedFilterOption = value!;
+                          _scrollController.jumpTo(0);
                         });
                       },
                     ),
@@ -328,212 +332,258 @@ class _TeamDetailsSearchWithFilterState
                   )
                 ],
               ),
-              SizedBox(height: 20),
-              Expanded(
-                child: isLoading == true
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : filteredDataList.isEmpty
-                        ? Center(
-                            child: Text("No Data Found."),
-                          )
-                        : Scrollbar(
+            ),
+            SizedBox(height: 20),
+            Expanded(
+              child: isLoading == true
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : filteredDataList.isEmpty
+                      ? Center(
+                          child: Text("No Data Found."),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Scrollbar(
                             thickness: 6,
                             radius: Radius.circular(20),
                             interactive: true,
                             controller: _scrollController,
-                            child: ListView.builder(
-                              controller: _scrollController,
-                              shrinkWrap: true,
-                              physics: ScrollPhysics(),
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                              itemCount: filteredDataList.length,
-                              itemBuilder: (context, index) {
-                                var item = filteredDataList[index];
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: index.isOdd
-                                            ? Radius.circular(50)
-                                            : Radius.circular(0),
-                                        bottomRight: index.isOdd
-                                            ? Radius.circular(50)
-                                            : Radius.circular(0),
-                                        topRight: index.isOdd
-                                            ? Radius.circular(0)
-                                            : Radius.circular(50),
-                                        bottomLeft: index.isOdd
-                                            ? Radius.circular(0)
-                                            : Radius.circular(50),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListView.builder(
+                                controller: _scrollController,
+                                shrinkWrap: true,
+                                physics: ScrollPhysics(),
+                                padding: EdgeInsets.symmetric(vertical: 20),
+                                itemCount: filteredDataList.length,
+                                itemBuilder: (context, index) {
+                                  var item = filteredDataList[index];
+
+                                  String techNames = "";
+                                  technologyList.where((e) {
+                                    for (var i in item.technologies) {
+                                      if (i == e.technologyId) {
+                                        if (techNames.isNotEmpty) {
+                                          techNames = "$techNames, ${e.name}";
+                                        } else {
+                                          techNames = e.name.toString();
+                                        }
+                                      }
+                                    }
+                                    return true;
+                                  }).toList();
+
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: index.isOdd
+                                              ? Radius.circular(50)
+                                              : Radius.circular(0),
+                                          bottomRight: index.isOdd
+                                              ? Radius.circular(50)
+                                              : Radius.circular(0),
+                                          topRight: index.isOdd
+                                              ? Radius.circular(0)
+                                              : Radius.circular(50),
+                                          bottomLeft: index.isOdd
+                                              ? Radius.circular(0)
+                                              : Radius.circular(50),
+                                        ),
+                                        border: Border(
+                                          left: BorderSide(
+                                            color: index.isEven
+                                                ? Colors.pinkAccent
+                                                : Colors.blueAccent,
+                                            width: 5,
+                                          ),
+                                          top: BorderSide(
+                                            color: index.isEven
+                                                ? Colors.pinkAccent
+                                                : Colors.blueAccent,
+                                          ),
+                                          bottom: BorderSide(
+                                            color: index.isEven
+                                                ? Colors.pinkAccent
+                                                : Colors.blueAccent,
+                                          ),
+                                          right: BorderSide(
+                                            color: index.isEven
+                                                ? Colors.pinkAccent
+                                                : Colors.blueAccent,
+                                            width: 5,
+                                          ),
+                                        ),
                                       ),
-                                      border: Border(
-                                        left: BorderSide(
-                                          color: index.isEven
-                                              ? Colors.pinkAccent
-                                              : Colors.blueAccent,
-                                          width: 5,
-                                        ),
-                                        top: BorderSide(
-                                          color: index.isEven
-                                              ? Colors.pinkAccent
-                                              : Colors.blueAccent,
-                                        ),
-                                        bottom: BorderSide(
-                                          color: index.isEven
-                                              ? Colors.pinkAccent
-                                              : Colors.blueAccent,
-                                        ),
-                                        right: BorderSide(
-                                          color: index.isEven
-                                              ? Colors.pinkAccent
-                                              : Colors.blueAccent,
-                                          width: 5,
-                                        ),
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20),
-                                      child: Column(
-                                        children: [
-                                          Center(
-                                            child: CircleAvatar(
-                                              backgroundColor:
-                                                  Colors.grey.shade300,
-                                              backgroundImage: item
-                                                      .profile!.isNotEmpty
-                                                  ? AssetImage(item.profile!)
-                                                  : AssetImage(
-                                                      ImagesPath.placeHolder),
-                                              radius: 50,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Column(
+                                          children: [
+                                            Center(
+                                              child: CircleAvatar(
+                                                backgroundColor:
+                                                    Colors.grey.shade300,
+                                                backgroundImage: item
+                                                        .profile!.isNotEmpty
+                                                    ? AssetImage(item.profile!)
+                                                    : AssetImage(
+                                                        ImagesPath.placeHolder),
+                                                radius: 50,
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                StringClass.employeeId,
-                                                style: CustomTextStyles
-                                                    .mediumTextStyle,
-                                              ),
-                                              Text(item.empId!.capitalize()),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Divider(),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                StringClass.name,
-                                                style: CustomTextStyles
-                                                    .mediumTextStyle,
-                                              ),
-                                              Text(item.name!),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Divider(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                StringClass.position,
-                                                style: CustomTextStyles
-                                                    .mediumTextStyle,
-                                              ),
-                                              Text(item.position!),
-                                            ],
-                                          ),
-                                          SizedBox(height: 5),
-                                          Divider(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                StringClass.department,
-                                                style: CustomTextStyles
-                                                    .mediumTextStyle,
-                                              ),
-                                              Text(item.department!
-                                                  .capitalize()),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Divider(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                StringClass.email,
-                                                style: CustomTextStyles
-                                                    .mediumTextStyle,
-                                              ),
-                                              Text(item.email!),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Divider(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                StringClass.mobile,
-                                                style: CustomTextStyles
-                                                    .mediumTextStyle,
-                                              ),
-                                              Text(item.mobile!),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Divider(),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                StringClass.homeTown,
-                                                style: CustomTextStyles
-                                                    .mediumTextStyle,
-                                              ),
-                                              Text(item.hometown!.capitalize()),
-                                            ],
-                                          ),
-                                        ],
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  StringClass.employeeId,
+                                                  style: CustomTextStyles
+                                                      .mediumTextStyle,
+                                                ),
+                                                Text(item.empId!.capitalize()),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Divider(),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  StringClass.name,
+                                                  style: CustomTextStyles
+                                                      .mediumTextStyle,
+                                                ),
+                                                Text(item.name!),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Divider(),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  StringClass.position,
+                                                  style: CustomTextStyles
+                                                      .mediumTextStyle,
+                                                ),
+                                                Text(item.position!),
+                                              ],
+                                            ),
+                                            SizedBox(height: 5),
+                                            Divider(),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  StringClass.department,
+                                                  style: CustomTextStyles
+                                                      .mediumTextStyle,
+                                                ),
+                                                Text(item.department!
+                                                    .capitalize()),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Divider(),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  StringClass.email,
+                                                  style: CustomTextStyles
+                                                      .mediumTextStyle,
+                                                ),
+                                                Text(item.email!),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Divider(),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  StringClass.mobile,
+                                                  style: CustomTextStyles
+                                                      .mediumTextStyle,
+                                                ),
+                                                Text(item.mobile!),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Divider(),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  StringClass.homeTown,
+                                                  style: CustomTextStyles
+                                                      .mediumTextStyle,
+                                                ),
+                                                Text(item.hometown!
+                                                    .capitalize()),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Divider(),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  StringClass.technologies,
+                                                  style: CustomTextStyles
+                                                      .mediumTextStyle,
+                                                ),
+                                                Text(techNames.capitalize()),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
                           ),
-              )
-            ],
-          ),
+                        ),
+            )
+          ],
         ));
   }
 }
