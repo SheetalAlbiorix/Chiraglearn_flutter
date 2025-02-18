@@ -29,21 +29,24 @@ class StringClass {
   static const department = "Department";
   static const email = "Email";
   static const mobile = "Mobile";
+  static const homeTown = "Hometown";
 
 //team details with filter
   static const selectTeamMember = 'Please select any team member';
   static const selectMember = 'Please select any team member';
 
   //TeamDetailsSearchWithFilter
-  static const appBarTitle = "Search With Filter in Team Details";
+  static const appBarTitle = "Search with or without using Filter";
   static const selectValue = "Select Value";
+  static const selectTechnology = "Select Technology";
+
   static const filterOptionEmpId = "By EmpId";
   static const filterOptionName = "By Name";
   static const filterOptionPosition = "By Position";
   static const filterOptionEmail = "By Email";
   static const filterOptionMobile = "By Mobile";
   static const filterOptionHometown = "By Hometown";
-  static const filterOptionTechnologies = "By Technologies";
+  static const filterOptionByTechnologies = "By Technologies";
 
   static const android = "Android";
   static const ios = "IOS";

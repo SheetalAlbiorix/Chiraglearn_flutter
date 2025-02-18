@@ -1,27 +1,27 @@
 // To parse this JSON data, do
 //
-//     final teamDetailsModel = teamDetailsModelFromJson(jsonString);
+//     final technologyModel = technologyModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<TeamDetailsModel> teamDetailsModelFromJson(String str) =>
-    List<TeamDetailsModel>.from(
-        json.decode(str).map((x) => TeamDetailsModel.fromJson(x)));
+List<TechnologyModel> technologyModelFromJson(String str) =>
+    List<TechnologyModel>.from(
+        json.decode(str).map((x) => TechnologyModel.fromJson(x)));
 
-String teamDetailsModelToJson(List<TeamDetailsModel> data) =>
+String technologyModelToJson(List<TechnologyModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class TeamDetailsModel {
+class TechnologyModel {
   int? technologyId;
   String? name;
 
-  TeamDetailsModel({
+  TechnologyModel({
     this.technologyId,
     this.name,
   });
 
-  factory TeamDetailsModel.fromJson(Map<String, dynamic> json) =>
-      TeamDetailsModel(
+  factory TechnologyModel.fromJson(Map<String, dynamic> json) =>
+      TechnologyModel(
         technologyId: json["technology_id"],
         name: json["name"],
       );

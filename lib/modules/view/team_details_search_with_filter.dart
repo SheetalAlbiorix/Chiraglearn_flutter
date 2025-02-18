@@ -7,6 +7,26 @@ import 'package:intern_project/modules/constants/custom_textstyles.dart';
 import 'package:intern_project/modules/constants/image_path.dart';
 import 'package:intern_project/modules/constants/string_constants.dart';
 import 'package:intern_project/modules/models/team_detail_model.dart';
+import 'package:intern_project/modules/models/technology_model.dart';
+
+extension Capitalize on String {
+  String capitalize() {
+    if (trim().isNotEmpty) {
+      final words = removeExtraSpaces()
+          .split(' ')
+          .map((e) => e[0].toUpperCase() + (e.length > 1 ? e.substring(1) : ''))
+          .toList();
+      return words.join(' ');
+    } else {
+      return this;
+    }
+  }
+
+  String removeExtraSpaces() {
+    if (trim().isEmpty) return '';
+    return trim().replaceAll(RegExp(' +'), ' ');
+  }
+}
 
 class TeamDetailsSearchWithFilter extends StatefulWidget {
   const TeamDetailsSearchWithFilter({super.key});
@@ -21,8 +41,9 @@ class _TeamDetailsSearchWithFilterState
   TextEditingController searchController = TextEditingController();
   FocusNode searchFocusNode = FocusNode();
 
-  List filteredDataList = [];
   bool isVisible = false;
+
+  final ScrollController _scrollController = ScrollController();
 
   List filterOptionList = [
     StringClass.selectValue,
@@ -32,20 +53,31 @@ class _TeamDetailsSearchWithFilterState
     StringClass.filterOptionEmail,
     StringClass.filterOptionMobile,
     StringClass.filterOptionHometown,
-    StringClass.filterOptionTechnologies
+    StringClass.filterOptionByTechnologies
   ];
 
   List technologyOptionList = [
-    StringClass.selectValue,
+    StringClass.selectTechnology,
     StringClass.android,
     StringClass.ios,
     StringClass.flutter,
     StringClass.reactNative,
     StringClass.kmm,
   ];
-  String selectedTechnologyOption = StringClass.selectValue;
+  String selectedTechnologyOption = StringClass.selectTechnology;
 
   String selectedFilterOption = StringClass.selectValue;
+
+  List<String?> getTechnologyNames(List<int> technologyIds) {
+    return technologyIds.map((id) {
+      final technology = technologyList.firstWhere(
+        (tech) => tech.technologyId == id,
+        orElse: () => TechnologyModel(
+            technologyId: -1, name: 'Unknown'), // Handle missing tech
+      );
+      return technology.name;
+    }).toList();
+  }
 
   @override
   void dispose() {
@@ -54,20 +86,33 @@ class _TeamDetailsSearchWithFilterState
   }
 
   List<TeamDetailsModel> allTeamList = [];
+
+  List<TechnologyModel> technologyList = [];
+  List<TeamDetailsModel> filteredDataList = [];
+
   bool isLoading = false;
 
   Future<void> loadJson() async {
     isLoading = true;
 
-    String jsonString =
+    String teamMemberJsonString =
         await rootBundle.loadString("assets/team_member_data.json");
-    var jsonList = jsonDecode(jsonString);
+    var teamMemberJsonList = jsonDecode(teamMemberJsonString);
+
+    String technologyJsonString =
+        await rootBundle.loadString("assets/technology.json");
+
+    var technologyJsonList = jsonDecode(technologyJsonString);
 
     setState(() {
-      allTeamList = jsonList
+      allTeamList = teamMemberJsonList
           .map<TeamDetailsModel>((json) => TeamDetailsModel.fromJson(json))
           .toList();
       filteredDataList = allTeamList;
+
+      technologyList = technologyJsonList
+          .map<TechnologyModel>((json) => TechnologyModel.fromJson(json))
+          .toList();
     });
     isLoading = false;
   }
@@ -89,114 +134,9 @@ class _TeamDetailsSearchWithFilterState
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Visibility(
-                    visible: selectedFilterOption ==
-                            StringClass.filterOptionTechnologies
-                        ? isVisible = false
-                        : true,
-                    child: Expanded(
-                      child: TextFormField(
-                        keyboardType: selectedFilterOption == "By Mobile"
-                            ? TextInputType.phone
-                            : selectedFilterOption == "By Email"
-                                ? TextInputType.emailAddress
-                                : TextInputType.name,
-                        controller: searchController,
-                        focusNode: searchFocusNode,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "please enter something";
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          setState(() {
-                            searchController.text = value;
-
-                            if (value.isEmpty) {
-                              filteredDataList =
-                                  allTeamList; // Show full list if search is empty
-                            } else if (value.isNotEmpty &&
-                                selectedFilterOption ==
-                                    StringClass.selectValue) {
-                              filteredDataList = allTeamList.where(
-                                (element) {
-                                  return element.empId!
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase()) ||
-                                      element.name!
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase()) ||
-                                      element.position!
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase()) ||
-                                      element.email!
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase()) ||
-                                      element.mobile!
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase()) ||
-                                      element.hometown!
-                                          .toLowerCase()
-                                          .contains(value.toLowerCase());
-                                },
-                              ).toList();
-                            } else if (value.isNotEmpty &&
-                                selectedFilterOption !=
-                                    StringClass.selectValue) {
-                              filteredDataList = allTeamList.where((element) {
-                                return selectedFilterOption == "By EmpId"
-                                    ? element.empId!
-                                        .toLowerCase()
-                                        .contains(value.toLowerCase())
-                                    : selectedFilterOption == "By Name"
-                                        ? element.name!
-                                            .toLowerCase()
-                                            .contains(value.toLowerCase())
-                                        : selectedFilterOption == "Position"
-                                            ? element.position!
-                                                .toLowerCase()
-                                                .contains(value.toLowerCase())
-                                            : selectedFilterOption == "By Email"
-                                                ? element.email!
-                                                    .toLowerCase()
-                                                    .contains(
-                                                        value.toLowerCase())
-                                                : selectedFilterOption ==
-                                                        "By Mobile"
-                                                    ? element.mobile!
-                                                        .toLowerCase()
-                                                        .contains(
-                                                            value.toLowerCase())
-                                                    : element.hometown!
-                                                        .toLowerCase()
-                                                        .contains(value
-                                                            .toLowerCase());
-                              }).toList();
-                            }
-                          });
-                        },
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          prefixIcon: Icon(Icons.search),
-                          hintText: "Search",
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
                   Container(
                     color: Colors.white,
-                    width: selectedFilterOption ==
-                            StringClass.filterOptionTechnologies
-                        ? 200
-                        : 170,
+                    width: 170,
                     child: DropdownButtonFormField(
                       value: selectedFilterOption,
                       isExpanded: true,
@@ -224,56 +164,171 @@ class _TeamDetailsSearchWithFilterState
                       },
                     ),
                   ),
-                  Visibility(
-                      visible: selectedFilterOption ==
-                              StringClass.filterOptionTechnologies
-                          ? true
-                          : false,
-                      child: Spacer()),
+                  SizedBox(width: 10),
                   Visibility(
                     visible: selectedFilterOption ==
-                            StringClass.filterOptionTechnologies
+                            StringClass.filterOptionByTechnologies
+                        ? isVisible = false
+                        : true,
+                    child: Expanded(
+                      child: TextFormField(
+                        autofocus: true,
+                        keyboardType: selectedFilterOption == "By Mobile"
+                            ? TextInputType.phone
+                            : selectedFilterOption == "By Email"
+                                ? TextInputType.emailAddress
+                                : TextInputType.name,
+                        controller: searchController,
+                        focusNode: searchFocusNode,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "please enter something";
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          isLoading = true;
+
+                          setState(() {
+                            searchController.text = value;
+
+                            if (value.isEmpty) {
+                              filteredDataList =
+                                  allTeamList; // Show full list if search is empty
+                            } else if (value.isNotEmpty &&
+                                selectedFilterOption ==
+                                    StringClass.selectValue) {
+                              print(
+                                  "\n----------------------- Empty is Filter------------------------\n");
+
+                              filteredDataList = allTeamList.where(
+                                (element) {
+                                  return element.empId!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()) ||
+                                      element.name!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()) ||
+                                      element.position!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()) ||
+                                      element.email!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()) ||
+                                      element.mobile!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase()) ||
+                                      element.hometown!
+                                          .toLowerCase()
+                                          .contains(value.toLowerCase());
+                                },
+                              ).toList();
+                            } else if (value.isNotEmpty &&
+                                selectedFilterOption !=
+                                    StringClass.selectValue) {
+                              print(
+                                  "\n-----------------------Using Filter------------------------\n");
+
+                              filteredDataList = allTeamList.where((element) {
+                                return selectedFilterOption == "By EmpId"
+                                    ? element.empId!
+                                        .toLowerCase()
+                                        .contains(value.toLowerCase())
+                                    : selectedFilterOption == "By Name"
+                                        ? element.name!
+                                            .toLowerCase()
+                                            .contains(value.toLowerCase())
+                                        : selectedFilterOption == "By Position"
+                                            ? element.position!
+                                                .toLowerCase()
+                                                .contains(value.toLowerCase())
+                                            : selectedFilterOption == "By Email"
+                                                ? element.email!
+                                                    .toLowerCase()
+                                                    .contains(
+                                                        value.toLowerCase())
+                                                : selectedFilterOption ==
+                                                        "By Mobile"
+                                                    ? element.mobile!
+                                                        .toLowerCase()
+                                                        .contains(
+                                                            value.toLowerCase())
+                                                    : element.hometown!
+                                                        .toLowerCase()
+                                                        .contains(value
+                                                            .toLowerCase());
+                              }).toList();
+                            }
+                          });
+                          isLoading = false;
+                        },
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          prefixIcon: Icon(Icons.search),
+                          hintText: "Search",
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: selectedFilterOption ==
+                            StringClass.filterOptionByTechnologies
                         ? true
                         : false,
-                    child: Container(
-                      color: Colors.white,
-                      width: selectedFilterOption ==
-                              StringClass.filterOptionTechnologies
-                          ? 200
-                          : 170,
-                      child: DropdownButtonFormField(
-                        value: selectedTechnologyOption,
-                        isExpanded: true,
-                        dropdownColor: Colors.white,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.filter_list_outlined),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
+                    child: Expanded(
+                      child: Container(
+                        color: Colors.white,
+                        child: DropdownButtonFormField(
+                          value: selectedTechnologyOption,
+                          isExpanded: true,
+                          dropdownColor: Colors.white,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
                           ),
-                        ),
-                        items: technologyOptionList.map(
-                          (value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value,
+                          items: technologyOptionList.map(
+                            (value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
                                   overflow: TextOverflow.ellipsis,
-                                  style: CustomTextStyles.smallTextStyle),
-                            );
+                                ),
+                              );
+                            },
+                          ).toList(),
+                          onChanged: (value) {
+                            print(
+                                "\n-----------------------$selectedTechnologyOption------------------------\n");
+                            setState(() {
+                              selectedTechnologyOption = value!;
+
+                              if (selectedTechnologyOption ==
+                                  StringClass.selectTechnology) {
+                                filteredDataList =
+                                    allTeamList; // Show all if "Select Value" is chosen
+                              } else {
+                                filteredDataList = allTeamList.where((member) {
+                                  List<String?> technologyNames =
+                                      getTechnologyNames(member.technologies);
+                                  return technologyNames
+                                      .contains(selectedTechnologyOption);
+                                }).toList();
+                              }
+                            });
                           },
-                        ).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            selectedTechnologyOption = value!;
-                          });
-                        },
+                        ),
                       ),
                     ),
                   )
                 ],
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               Expanded(
                 child: isLoading == true
                     ? Center(
@@ -283,179 +338,197 @@ class _TeamDetailsSearchWithFilterState
                         ? Center(
                             child: Text("No Data Found."),
                           )
-                        : SingleChildScrollView(
-                            child: SizedBox(
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: ScrollPhysics(),
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                itemCount: filteredDataList.length,
-                                itemBuilder: (context, index) {
-                                  var item = filteredDataList[index];
-                                  return Card(
-                                    elevation: 2,
-                                    shadowColor: Colors.blue.shade200,
-                                    child: ClipPath(
-                                      clipper: ShapeBorderClipper(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12))),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            border: Border(
-                                                left: BorderSide(
-                                                    color: Colors.pinkAccent,
-                                                    width: 6))),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(20),
-                                          child: Column(
-                                            children: [
-                                              Center(
-                                                child: CircleAvatar(
-                                                  backgroundColor:
-                                                      Colors.grey.shade300,
-                                                  backgroundImage: item
-                                                          .profile.isNotEmpty
-                                                      ? AssetImage(
-                                                          item.profile!)
-                                                      : AssetImage(ImagesPath
-                                                          .placeHolder),
-                                                  radius: 50,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    StringClass.employeeId,
-                                                    style: CustomTextStyles
-                                                        .mediumTextStyle,
-                                                  ),
-                                                  Text(item.empId!),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Divider(),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    StringClass.name,
-                                                    style: CustomTextStyles
-                                                        .mediumTextStyle,
-                                                  ),
-                                                  Text(item.name),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Divider(),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    StringClass.position,
-                                                    style: CustomTextStyles
-                                                        .mediumTextStyle,
-                                                  ),
-                                                  Text(
-                                                      item.position.toString()),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Divider(),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    StringClass.location,
-                                                    style: CustomTextStyles
-                                                        .mediumTextStyle,
-                                                  ),
-                                                  Text(item.location),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Divider(),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    StringClass.department,
-                                                    style: CustomTextStyles
-                                                        .mediumTextStyle,
-                                                  ),
-                                                  Text(item.department),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Divider(),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    StringClass.email,
-                                                    style: CustomTextStyles
-                                                        .mediumTextStyle,
-                                                  ),
-                                                  Text(item.email),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Divider(),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    StringClass.mobile,
-                                                    style: CustomTextStyles
-                                                        .mediumTextStyle,
-                                                  ),
-                                                  Text(item.department),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                            ],
-                                          ),
+                        : Scrollbar(
+                            thickness: 6,
+                            radius: Radius.circular(20),
+                            interactive: true,
+                            controller: _scrollController,
+                            child: ListView.builder(
+                              controller: _scrollController,
+                              shrinkWrap: true,
+                              physics: ScrollPhysics(),
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              itemCount: filteredDataList.length,
+                              itemBuilder: (context, index) {
+                                var item = filteredDataList[index];
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: index.isOdd
+                                            ? Radius.circular(50)
+                                            : Radius.circular(0),
+                                        bottomRight: index.isOdd
+                                            ? Radius.circular(50)
+                                            : Radius.circular(0),
+                                        topRight: index.isOdd
+                                            ? Radius.circular(0)
+                                            : Radius.circular(50),
+                                        bottomLeft: index.isOdd
+                                            ? Radius.circular(0)
+                                            : Radius.circular(50),
+                                      ),
+                                      border: Border(
+                                        left: BorderSide(
+                                          color: index.isEven
+                                              ? Colors.pinkAccent
+                                              : Colors.blueAccent,
+                                          width: 5,
+                                        ),
+                                        top: BorderSide(
+                                          color: index.isEven
+                                              ? Colors.pinkAccent
+                                              : Colors.blueAccent,
+                                        ),
+                                        bottom: BorderSide(
+                                          color: index.isEven
+                                              ? Colors.pinkAccent
+                                              : Colors.blueAccent,
+                                        ),
+                                        right: BorderSide(
+                                          color: index.isEven
+                                              ? Colors.pinkAccent
+                                              : Colors.blueAccent,
+                                          width: 5,
                                         ),
                                       ),
                                     ),
-                                  );
-                                },
-                              ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20),
+                                      child: Column(
+                                        children: [
+                                          Center(
+                                            child: CircleAvatar(
+                                              backgroundColor:
+                                                  Colors.grey.shade300,
+                                              backgroundImage: item
+                                                      .profile!.isNotEmpty
+                                                  ? AssetImage(item.profile!)
+                                                  : AssetImage(
+                                                      ImagesPath.placeHolder),
+                                              radius: 50,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                StringClass.employeeId,
+                                                style: CustomTextStyles
+                                                    .mediumTextStyle,
+                                              ),
+                                              Text(item.empId!.capitalize()),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Divider(),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                StringClass.name,
+                                                style: CustomTextStyles
+                                                    .mediumTextStyle,
+                                              ),
+                                              Text(item.name!),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Divider(),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                StringClass.position,
+                                                style: CustomTextStyles
+                                                    .mediumTextStyle,
+                                              ),
+                                              Text(item.position!),
+                                            ],
+                                          ),
+                                          SizedBox(height: 5),
+                                          Divider(),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                StringClass.department,
+                                                style: CustomTextStyles
+                                                    .mediumTextStyle,
+                                              ),
+                                              Text(item.department!
+                                                  .capitalize()),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Divider(),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                StringClass.email,
+                                                style: CustomTextStyles
+                                                    .mediumTextStyle,
+                                              ),
+                                              Text(item.email!),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Divider(),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                StringClass.mobile,
+                                                style: CustomTextStyles
+                                                    .mediumTextStyle,
+                                              ),
+                                              Text(item.mobile!),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Divider(),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                StringClass.homeTown,
+                                                style: CustomTextStyles
+                                                    .mediumTextStyle,
+                                              ),
+                                              Text(item.hometown!.capitalize()),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
               )

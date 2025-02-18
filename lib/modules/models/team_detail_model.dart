@@ -23,7 +23,7 @@ class TeamDetailsModel {
   String? department;
   String? team;
   String? hometown;
-  List<int>? technologies;
+  List<int> technologies;
 
   TeamDetailsModel({
     this.id,
@@ -37,7 +37,7 @@ class TeamDetailsModel {
     this.department,
     this.team,
     this.hometown,
-    this.technologies,
+    required this.technologies,
   });
 
   factory TeamDetailsModel.fromJson(Map<String, dynamic> json) =>
