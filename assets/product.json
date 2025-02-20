@@ -1,0 +1,82 @@
+[
+  {
+    "name": "T-Shirt",
+    "price": 20
+  },
+  {
+    "name": "Jeans",
+    "price": 50
+  },
+  {
+    "name": "Sneakers",
+    "price": 80
+  },
+  {
+    "name": "Hoodie",
+    "price": 40
+  },
+  {
+    "name": "Socks",
+    "price": 10
+  },
+  {
+    "name": "Belt",
+    "price": 30
+  },
+  {
+    "name": "Hat",
+    "price": 25
+  },
+  {
+    "name": "Sunglasses",
+    "price": 60
+  },
+  {
+    "name": "Watch",
+    "price": 100
+  },
+  {
+    "name": "Backpack",
+    "price": 45
+  },
+  {
+    "name": "Laptop Bag",
+    "price": 35
+  },
+  {
+    "name": "Water Bottle",
+    "price": 15
+  },
+  {
+    "name": "Headphones",
+    "price": 75
+  },
+  {
+    "name": "Phone Case",
+    "price": 20
+  },
+  {
+    "name": "Charger",
+    "price": 25
+  },
+  {
+    "name": "Book",
+    "price": 12
+  },
+  {
+    "name": "Notebook",
+    "price": 5
+  },
+  {
+    "name": "Pen Set",
+    "price": 8
+  },
+  {
+    "name": "Mug",
+    "price": 10
+  },
+  {
+    "name": "Towel",
+    "price": 15
+  }
+]

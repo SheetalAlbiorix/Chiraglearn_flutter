@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intern_project/constants/custom_appbar.dart';
 import 'package:intern_project/constants/custom_textstyles.dart';
-import 'package:intern_project/view/screen.dart';
+import 'package:intern_project/view/extends.dart';
+import 'package:intern_project/view/login.dart';
 
 class IndexScreen extends StatelessWidget {
   IndexScreen({super.key});
 
-  final taskItems = ["Task 1 - Data Type Task"];
+  final taskItems = [
+    "Task 6 - shopping cart demo using implement",
+    "shape demo using extends",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class IndexScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return DemoClass();
+                    return index == 0 ? Login() : Extends();
                   },
                 ));
               },
