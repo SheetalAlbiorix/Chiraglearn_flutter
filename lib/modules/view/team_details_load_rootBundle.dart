@@ -7,20 +7,22 @@ import 'package:intern_project/modules/constants/custom_textstyles.dart';
 import 'package:intern_project/modules/constants/image_path.dart';
 import 'package:intern_project/modules/constants/string_constants.dart';
 
-class TeamDetailsUsingJson extends StatefulWidget {
-  const TeamDetailsUsingJson({super.key});
+class TeamDetailsUsingRootBundle extends StatefulWidget {
+  const TeamDetailsUsingRootBundle({super.key});
 
   @override
-  State<TeamDetailsUsingJson> createState() => _TeamDetailsUsingJsonState();
+  State<TeamDetailsUsingRootBundle> createState() =>
+      _TeamDetailsUsingRootBundleState();
 }
 
-class _TeamDetailsUsingJsonState extends State<TeamDetailsUsingJson> {
+class _TeamDetailsUsingRootBundleState
+    extends State<TeamDetailsUsingRootBundle> {
   List list = [];
 
   loadJsonData() async {
-    final String jsonData = await rootBundle.loadString(StringClass.jsonPath);
+    String jsonString = await rootBundle.loadString(StringClass.jsonPath);
 
-    List jsonList = jsonDecode(jsonData);
+    List jsonList = jsonDecode(jsonString);
     setState(() {
       list = jsonList;
       list.sort((a, b) => a['name'].compareTo(b['name']));

@@ -7,16 +7,15 @@ import 'package:intern_project/modules/constants/custom_textstyles.dart';
 import 'package:intern_project/modules/constants/image_path.dart';
 import 'package:intern_project/modules/constants/string_constants.dart';
 
-class TeamDetailsUsingJsonDropDown extends StatefulWidget {
-  const TeamDetailsUsingJsonDropDown({super.key});
+class TeamDetailsWithoutModel extends StatefulWidget {
+  const TeamDetailsWithoutModel({super.key});
 
   @override
-  State<TeamDetailsUsingJsonDropDown> createState() =>
-      _TeamDetailsUsingJsonDropDownState();
+  State<TeamDetailsWithoutModel> createState() =>
+      _TeamDetailsWithoutModelState();
 }
 
-class _TeamDetailsUsingJsonDropDownState
-    extends State<TeamDetailsUsingJsonDropDown> {
+class _TeamDetailsWithoutModelState extends State<TeamDetailsWithoutModel> {
   List allTeamList = [];
   List dropDownTeamList = [];
   bool isLoading = true;

@@ -28,16 +28,16 @@ extension Capitalize on String {
   }
 }
 
-class TeamDetailsSearchWithFilter extends StatefulWidget {
-  const TeamDetailsSearchWithFilter({super.key});
+class SearchWithFilterUsingModel extends StatefulWidget {
+  const SearchWithFilterUsingModel({super.key});
 
   @override
-  State<TeamDetailsSearchWithFilter> createState() =>
-      _TeamDetailsSearchWithFilterState();
+  State<SearchWithFilterUsingModel> createState() =>
+      _SearchWithFilterUsingModelState();
 }
 
-class _TeamDetailsSearchWithFilterState
-    extends State<TeamDetailsSearchWithFilter> {
+class _SearchWithFilterUsingModelState
+    extends State<SearchWithFilterUsingModel> {
   TextEditingController searchController = TextEditingController();
   FocusNode searchFocusNode = FocusNode();
 
