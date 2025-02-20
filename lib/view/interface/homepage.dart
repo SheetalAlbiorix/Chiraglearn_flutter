@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:intern_project/product_model.dart';
-import 'package:intern_project/view/add_product.dart';
-import 'package:intern_project/view/login.dart';
+import 'package:intern_project/model/product_model.dart';
+import 'package:intern_project/view/interface/add_product.dart';
+import 'package:intern_project/view/interface/login.dart';
 
 abstract class User {
   void login();

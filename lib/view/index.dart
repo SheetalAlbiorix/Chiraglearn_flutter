@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intern_project/constants/custom_appbar.dart';
 import 'package:intern_project/constants/custom_textstyles.dart';
-import 'package:intern_project/view/extends.dart';
-import 'package:intern_project/view/login.dart';
+import 'package:intern_project/view/inheritance/extends.dart';
+import 'package:intern_project/view/interface/login.dart';
 
 class IndexScreen extends StatelessWidget {
   IndexScreen({super.key});

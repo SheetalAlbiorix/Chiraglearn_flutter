@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intern_project/constants/custom_appbar.dart';
-import 'package:intern_project/view/screen.dart';
+import 'package:intern_project/view/interface/homepage.dart';
 
 class Login extends StatefulWidget {
   const Login({
